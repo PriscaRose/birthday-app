@@ -1,0 +1,22 @@
+{
+  "name": "birthday-app",
+  "version": "1.0.0",
+  "description": "Hey team! So the final project here will be a birthday list.",
+  "main": "script.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "npm i date-fns"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": [
+    "last 1 chrome versions"
+  ],
+  "dependencies": {
+    "date-fns": "^5.1.0",
+    "regenerator-runtime": "^0.13.7"
+  }
+}

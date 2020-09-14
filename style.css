@@ -1,0 +1,44 @@
+article {
+  background-color: rgba(119, 136, 153, 0.719);
+}
+
+h1 {
+  text-align: left;
+}
+.items {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: 1rem;
+}
+
+.image {
+  border-radius: 50%;
+}
+
+.edit-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.delete,
+.edit {
+  background-color: transparent;
+  padding: 0;
+  border-color: transparent;
+}
+
+.popup {
+	background: yellow;
+	position: fixed;
+	height: 100%;
+	width: 50%;
+	transition: all 0.25s;
+	top: 0;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+  border-radius: 1rem;
+  margin-left: 25%;
+}
