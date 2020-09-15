@@ -2,9 +2,24 @@ article {
   background-color: rgba(119, 136, 153, 0.719);
 }
 
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-inline-start: 1rem;
+  margin-inline-end: 1rem;
+}
+
 h1 {
   text-align: left;
+  text-transform: uppercase;
 }
+
+h2 {
+  color: blanchedalmond;
+}
+
 .items {
   display: flex;
   list-style: none;
@@ -29,8 +44,9 @@ h1 {
   border-color: transparent;
 }
 
-.popup {
-	background: yellow;
+.popup,
+.addNewPersForm {
+	background: seagreen;
 	position: fixed;
 	height: 100%;
 	width: 50%;
@@ -41,4 +57,39 @@ h1 {
 	align-items: center;
   border-radius: 1rem;
   margin-left: 25%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.addNewPersForm {
+  background-color: sienna;
+  pointer-events: all;
+  opacity: 1;
+}
+
+.popup.open {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.deleteBtnContainer {
+  background-color: azure;
+    position: absolute;
+    top: 30%;
+    right: 20%;
+    left: 20%;
+    width: 50%;
+    height: 50%;
+    opacity: 0;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.deleteBtnContainer.open {
+  pointer-events: all;
+  opacity: 1;
 }
