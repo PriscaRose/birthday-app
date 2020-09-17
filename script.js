@@ -13,18 +13,22 @@ async function fetchPerson() {
 
   // Display person list
   const displayPerson = () => {
-    const sortedPerson = data.sort((a, b) => b.birthday - a.birthday);
-    //Generate html
-    // format(new Date(person.birthday), 'yyy-MM-dd'
+    const sortedPerson = data.sort((a, b) => a.numberOfDays - b.numberOfDays);
+
+    //Display the date
     const html = sortedPerson.map(person => {
       const personBirt = new Date(person.birthday);
       const newDay = personBirt.getDay() + 1;
-      const newMonth = personBirt.getMonth() + 1;
+      const newMonth = personBirt.toLocaleString('en-us', { month: 'long' });
       const newYear = new Date();
       const year = newYear.getFullYear();
-      const birthday = `Turns ${newDay}-${newMonth}-${year}`;
+      const birthday = `${newDay}-${newMonth}-${year}`;
+      const personAge = newYear.getFullYear() - personBirt.getFullYear();
+      const birthdayPers = `Turns ${personAge} on the ${newMonth} ${newDay}th`
       const days = new Date(birthday).getTime();
       const numberOfDays = Math.floor((newYear - days) / 86400000);
+
+      //Generate html
       return `
               <li class="items" id="${person.id}">
                 <img class="image" src="${person.picture}" alt="">
@@ -33,7 +37,7 @@ async function fetchPerson() {
                     <span class="first-name">${person.firstName}</span>
                     <span class="last-name">${person.lastName}</span>
                   </div>
-                  <span class="birth_date">${birthday}</span>
+                  <span class="birth_date">${birthdayPers}</span>
                 </div>
                 <div>
                   <span class="days">${numberOfDays} days</span>
@@ -69,7 +73,6 @@ async function fetchPerson() {
   // edit the popup
   function editPopup(id) {
     const findId = data.find(person => person.id === id);
-    console.log(findId);
     return new Promise(async function (resolve) {
       const popup = document.createElement('form');
       popup.classList.add('popup');
@@ -88,7 +91,7 @@ async function fetchPerson() {
               </fieldset>
               <fieldset>
                 <label for="days"></label>
-                <input type="date" name="days" value="" id="days"/>
+                <input type="number" name="days" value="" id="days"/>
               </fieldset>
               <div>
                 <button type="submit" class="submit-btn">Save the form</button>
@@ -98,7 +101,6 @@ async function fetchPerson() {
 
       // Submit form that have been edited
       popup.addEventListener('submit', (e) => {
-        console.log(e.target);
         e.preventDefault();
         // let people = displayPerson()
         findId.lastName = popup.lastName.value;
@@ -131,11 +133,11 @@ async function fetchPerson() {
       return new Promise(async function (resolve) {
         const div = document.createElement('div');
         div.classList.add('deleteBtnContainer');
-        div.insertAdjacentHTML('Afterbegin', `
+        div.innerHTML = `
           <p>Are you sure you want to delete it</p>
           <button type="button" class="confirm">Yes</button>
           <button type="button" class="cancel">No</button>
-      `);
+      `;
         document.body.appendChild(div);
         //put a very small titmeout before we add the open class
         await setTimeOut(10);
@@ -159,26 +161,23 @@ async function fetchPerson() {
       destroyPopup(addForm);
       displayPerson();
     };
+
   }
 
   // Handle the delete button
   const handleDeleteBtn = e => {
     const deleteBtnEl = e.target.closest('button.confirm');
     if (deleteBtnEl) {
-      console.log('deleted');
       const btn = document.querySelector('.delete');
-      console.log(btn);
       const id = btn.value;
       deleteBtn(id);
       const div = document.querySelector('.deleteBtnContainer');
-      setTimeOut(10);
       destroyPopup(div)
     }
   }
 
   const deleteBtn = (id) => {
     data = data.filter(person => person.id !== id);
-    console.log(data);
     list.dispatchEvent(new CustomEvent('listUpdated'));
   };
 
@@ -205,7 +204,7 @@ async function fetchPerson() {
               </fieldset>
               <fieldset>
                 <label for="days"></label>
-                <input type="date" name="days" value="" required/>
+                <input type="number" name="days" value="" required/>
               </fieldset>
               <div>
                 <button type="submit" class="submit-btn">Save the form</button>
@@ -246,7 +245,7 @@ async function fetchPerson() {
     };
   }
 
-  // const form = document.querySelector('.addNewPersForm');
+  // Listen to the events
   window.addEventListener('click', handleDeleteBtn);
   window.addEventListener('click', handleClick);
   addBtn.addEventListener('click', addPerson);
@@ -254,7 +253,6 @@ async function fetchPerson() {
   list.addEventListener('click', editPopupPartener);
   list.addEventListener('listUpdated', displayPerson);
   list.addEventListener('listUpdated', setToLocalStorage);
-
 
   restoreFromLocalStorage();
 
