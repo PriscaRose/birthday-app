@@ -94,3 +94,13 @@ h2 {
   opacity: 1;
 }
 
+.wrapper-btn {
+  display: flex;
+}
+
+.confirm,
+.cancel {
+  background-color: rgb(128, 105, 0);
+  border-color: transparent;
+  border-radius: 1rem;
+}

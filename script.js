@@ -9,34 +9,34 @@ async function fetchPerson() {
   const response = await fetch("./people.json");
   let data = await response.json();
 
-    // Display person list
-    const displayPerson = () => {
-      const sortedPerson = data.sort((a, b) => a.numberOfDays - b.numberOfDays);
+  // Display person list
+  const displayPerson = () => {
+    // const sortedPerson = data.sort((a, b) => b.birthday - a.birthday);
+    //Display the date
+    const html = data.map(person => {
+      const personBirt = new Date(person.birthday);
+      let newDay = personBirt.getDay();
+      const newMonth = personBirt.toLocaleString('en-us', { month: 'long' });
+      const newYear = new Date();
+      const year = newYear.getFullYear();
+      const birthday = `${newDay}-${newMonth}-${year}`;
+      const personAge = newYear.getFullYear() - personBirt.getFullYear();
+      if (newDay == 1 || newDay == 21 || newDay == 31) {
+        newDay += "st";
+      }
+      else if (newDay == 2 || newDay == 22) {
+        newDay += "nd";
+      }
+      else {
+        newDay += "th";
+      }
 
-      //Display the date
-      const html = sortedPerson.map(person => {
-        const personBirt = new Date(person.birthday);
-        let newDay = personBirt.getDay() + 1;
-        const newMonth = personBirt.toLocaleString('en-us', { month: 'long' });
-        const newYear = new Date();
-        const year = newYear.getFullYear();
-        const birthday = `${newDay}-${newMonth}-${year}`;
-        const personAge = newYear.getFullYear() - personBirt.getFullYear();
-        if(newDay == 1 || newDay == 21 || newDay == 31) {
-          newDay += "st";
-        }
-        else if(newDay == 2 || newDay == 22) {
-          newDay += "nd";
-        }
-        else {
-          newDay += "th";
-        }
-        const birthdayPers = `Turns ${personAge} on the ${newMonth} ${newDay}`;
-        const days = new Date(birthday).getTime();
-        const numberOfDays = Math.floor((newYear - days) / 86400000);
+      const birthdayPers = `Turns ${personAge} on the ${newMonth} ${newDay}`;
+      const days = new Date(birthday).getTime();
+      const numberOfDays = Math.floor(-(newYear - days) / 86400000);
 
-        //Generate html
-        return `
+      //Generate html
+      return `
                 <li class="items" id="${person.id}">
                   <img class="image" src="${person.picture}" alt="">
                   <div class="wrapper">
@@ -57,19 +57,19 @@ async function fetchPerson() {
                   </button>
                 </li>
             `;
-      });
+    });
 
-      //Append the html into the DOM
-      list.innerHTML = html.join('');
-    };
+    //Append the html into the DOM
+    list.innerHTML = html.join('');
+  };
 
-    // Set the time that you want to run another data
+  // Set the time that you want to run another data
   const setTimeOut = (ms = 0) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
 
   // This function destroy the popup
-   async function destroyPopup(popup) {
+  async function destroyPopup(popup) {
     await setTimeOut(100);
     // remove it from the DOM
     popup.remove();
@@ -81,7 +81,7 @@ async function fetchPerson() {
   function editPopup(id) {
     const findId = data.find(person => person.id === id);
     return new Promise(async function (resolve) {
-    const birthday = document.querySelector('.birth_date');
+      const birthday = document.querySelector('.birth_date');
       const popup = document.createElement('form');
       popup.classList.add('popup');
       popup.insertAdjacentHTML('afterbegin', `
@@ -137,7 +137,7 @@ async function fetchPerson() {
         const div = document.createElement('div');
         div.classList.add('deleteBtnContainer');
         div.insertAdjacentHTML('afterbegin', `
-          <p>Are you sure you want to delete it</p>
+          <p>Are you sure you want to delete it?</p>
           <button type="button" class="confirm">Yes</button>
           <button type="button" class="cancel">No</button>
       `);
@@ -189,7 +189,7 @@ async function fetchPerson() {
   const addPerson = (e) => {
     const form = document.createElement('form');
     form.classList.add('addPopup');
-      form.insertAdjacentHTML('afterbegin', `
+    form.insertAdjacentHTML('afterbegin', `
               <h2> Add a new person's birthday here</h2>
               <fieldset>
                 <label for="picture"></label>
@@ -228,19 +228,21 @@ async function fetchPerson() {
       };
       data.push(newPerson);
       // displayPerson(data);
+
       list.dispatchEvent(new CustomEvent('listUpdated'));
       formEl.reset();
+      destroyPopup(formEl);
     };
 
     form.addEventListener('submit', displayNewPer);
   };
-
 
   // Store the songs in the local storage
   const setToLocalStorage = () => {
     const objectStringyfy = JSON.stringify(data);
     localStorage.setItem('data', objectStringyfy);
   };
+
   const restoreFromLocalStorage = () => {
     const personLs = JSON.parse(localStorage.getItem('data'));
     console.log(personLs);
@@ -254,14 +256,13 @@ async function fetchPerson() {
   window.addEventListener('click', handleDeleteBtn);
   window.addEventListener('click', handleClick);
   addBtn.addEventListener('click', addPerson);
-  // list.addEventListener('submit', displayNewPer);
   list.addEventListener('click', editPopupPartener);
   list.addEventListener('listUpdated', displayPerson);
   list.addEventListener('listUpdated', setToLocalStorage);
 
   restoreFromLocalStorage();
 
-};fetchPerson();
+}; fetchPerson();
 
 
 
