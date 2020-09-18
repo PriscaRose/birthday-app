@@ -30,7 +30,7 @@ h2 {
 
 .image {
   border-radius: 50%;
-  width: 20%;
+  max-width: 20%;
 }
 
 .edit-icon {
@@ -75,12 +75,11 @@ h2 {
 
 .deleteBtnContainer {
   background-color: azure;
-    position: absolute;
-    top: 30%;
-    right: 20%;
-    left: 20%;
+    position: fixed;
+    top: 0;
     width: 50%;
     height: 50%;
+    transform: translate(50%, 50%);
     opacity: 0;
     display: grid;
     justify-content: center;
