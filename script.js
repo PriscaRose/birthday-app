@@ -11,7 +11,6 @@ async function fetchPerson() {
 
   // Display person list
   const displayPerson = () => {
-    // const sortedPerson = data.sort((a, b) => b.birthday - a.birthday);
     //Display the date
     const html = data.map(person => {
       const personBirt = new Date(person.birthday);
@@ -80,8 +79,12 @@ async function fetchPerson() {
   // edit the popup
   function editPopup(id) {
     const findId = data.find(person => person.id === id);
+    let peopleBithday = new Date(findId.birthday);
+    let newDay = peopleBithday.getDay();
+    const newMonth = peopleBithday.toLocaleString('en-us', { month: 'long' });
+    const year = peopleBithday.getFullYear();
+    const birthday = `${newDay}-${newMonth}-${year}`;
     return new Promise(async function (resolve) {
-      const birthday = document.querySelector('.birth_date');
       const popup = document.createElement('form');
       popup.classList.add('popup');
       popup.insertAdjacentHTML('afterbegin', `
@@ -95,7 +98,7 @@ async function fetchPerson() {
               </fieldset>
               <fieldset>
                 <label for="birthday"></label>
-                <input type="date" name="birthday" value="${birthday.textContent}" id="birthday"/>
+                <input type="text" name="birthday" value="${birthday}" id="birthday"/>
               </fieldset>
               <div>
                 <button type="submit" class="submit-btn">Save the form</button>
@@ -192,20 +195,20 @@ async function fetchPerson() {
     form.insertAdjacentHTML('afterbegin', `
               <h2> Add a new person's birthday here</h2>
               <fieldset>
-                <label for="picture"></label>
-                <input type="url" class="picture" name="picture" value="" required/>
+                <label for="picture">Add a picture</label>
+                <input type="url" class="picture" id="picture" name="picture" value="" required/>
               </fieldset>
               <fieldset>
-                <label for="name"></label>
-                <input type="text" name="lastName" value="" required/>
+                <label for="name">Your last name</label>
+                <input type="text" id="name" name="lastName" value="" required/>
               </fieldset>
               <fieldset>
-                <label for="firstName"></label>
-                <input type="text" name="firstName" value="" required/>
+                <label for="firstName">Your first name</label>
+                <input type="text" id="firstName" name="firstName" value="" required/>
               </fieldset>
               <fieldset>
-                <label for="birthday"></label>
-                <input type="date" name="birthday" value="" required/>
+                <label for="birthday">Your birthday</label>
+                <input type="date" id="birthday" name="birthday" value="" required/>
               </fieldset>
               <div>
                 <button type="submit" class="submit-btn">Save the form</button>

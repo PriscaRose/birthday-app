@@ -1,5 +1,6 @@
 article {
   background-color: rgba(119, 136, 153, 0.719);
+  padding: 2rem 1rem;
 }
 
 header {
@@ -7,13 +8,15 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-inline-start: 1rem;
-  margin-inline-end: 1rem;
+  padding-block-end: 3rem;
 }
 
 h1 {
   text-align: left;
   text-transform: uppercase;
+  color: darkred;
+  font-family: serif;
+  font-style: italic;
 }
 
 h2 {
@@ -63,9 +66,10 @@ h2 {
 }
 
 .addPopup {
-  background-color: sienna;
+  background-color: currentColor;
   pointer-events: all;
   opacity: 1;
+  text-align: center;
 }
 
 .popup.open {
@@ -103,4 +107,17 @@ h2 {
   background-color: rgb(128, 105, 0);
   border-color: transparent;
   border-radius: 1rem;
+}
+
+ul {
+  padding: 0;
+}
+
+.add-person {
+  border-radius: 2rem;
+  border-color: transparent;
+  text-transform: uppercase;
+  color: indigo;
+  background-color: azure;
+
 }
