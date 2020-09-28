@@ -40,7 +40,7 @@ async function fetchPerson() {
     //Display the date
     const html = sortedBirt.map(person => {
       const personBirt = new Date(person.birthday);
-      let newDay = personBirt.getDay();
+      let newDay = personBirt.getDay() + 1;
       const newMonth = personBirt.toLocaleString('en-us', { month: 'long' });
       const newYear = new Date();
       const year = newYear.getFullYear();
