@@ -56,7 +56,7 @@ async function fetchPerson() {
         newDay += "th";
       }
 
-      const birthdayPers = `Turns ${personAge} on the ${newMonth} ${newDay}`;
+      const birthdayPers = `Turns ${personAge + 1} on the ${newMonth} ${newDay}`;
       const days = new Date(birthday).getTime();
       const numberOfDays = Math.floor(-(newYear - days) / 86400000);
 
