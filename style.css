@@ -119,5 +119,10 @@ ul {
   text-transform: uppercase;
   color: indigo;
   background-color: azure;
+}
 
+form {
+  display: flex;
+  justify-content: space-between;
+  margin-block-end: 3rem;
 }

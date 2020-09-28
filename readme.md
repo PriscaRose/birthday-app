@@ -1,42 +1,22 @@
-# Term 3 JS Project : Birthday App
 
-Hey team! So the final project here will be a birthday list.
+## Birthday app
 
-We have a list of persons. The app will show us whose person is the closest to have their birthday.
+ ### 1- The structure of my project
 
-You have a file in the project called person.json. It contains a list of persons, and we want to add all those persons to our birthday list app.
+ First, I generated the basic html in the index.html file. Second, I grabbed all the elements which am going to use. Third, I created a fucntion that fecth the people birthday. After that I created many function inside of the fecth function because all the function based on it.Fistly, I generated the function that will display the list of the person's birthday in the DOM. Secondly, I generated a function that set the time which the user has to wait while they use the app. Thirdly, I generated a function that destroy the popup so that every time the user has done something the popup will disappear. Forthly, I created a function that allows the user to edit the data. After that, I created another function that allows a user to cancel the popup. And then, I geneated a function that allows the user to delete the the birthday list. Finaly, I listened to all events.
 
-The first time you launch the app, it should fetch all the data from the people.json local file. You can use fetch for that, it also works with local files.
+### 2- Improvements
 
-Once they are loaded in the app, you can save them on localstorage, and you don't need to work with the json file anymore.
+If I had more time I would make everything works and then refactor my code in order to get it neater.
 
-The app will show the list of people, sorted by the ones who will have their birthday the soonest.
+### 3- Something that I learned
 
-![assets/Screenshot_2020-09-12_at_16.57.18.png](assets/Screenshot_2020-09-12_at_16.57.18.png)
+I learned many things from this project because there are lots new things that I occured such as working with date. What's more, I learned how to work with local storage and fetch at the same time.
 
-The screenshot is just an example of a possible layout. Feel free to create a custom layout with boostrap if you want to.
+### 4- Biggest challenge
 
-The users will be able to add a new element on the list (only on the app list localstorage, not on the json). Here are the fields :
+I had a great deal of difficulty in converting the birthday time stamp into a normal date. I didn't know how to sort the number of days. I was also struggling to make the local storage work.
 
--   first name
--   last name
--   birthday (datepicker)
--   an url for their avatar image
--   an id for handling the operations on the objects. (no need to add that on the form)
+### Comments
 
-The users should be able to edit an element on the list. When you click the edit button, a modal should appear with a form inside, to edit any attribute.
-
-The users should be able to delete an element. There will be a modal that will ask if you're sure to delete the element.
-
-Every action should be persisted into the local storage.
-
-Here is the package you should use for handling date computations. Add it as a dependency of your project
-
-[https://date-fns.org/v1.29.0/docs/differenceInYears](https://date-fns.org/v1.29.0/docs/differenceInYears)
-
-Again, try to make a plan, by dividing big tasks into smaller ones.
-You have the whole week to work on it. You can collaborate with other students, but copy/pasting code is forbidden.
-Once you're finished with the functionality, try to make your app more appealing with css and other tricks.
-Be creative 🎨
-
-Good Luck
+It was such an enjoyable project. Thank you so much for structuring it.

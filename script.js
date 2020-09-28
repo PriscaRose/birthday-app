@@ -1,18 +1,47 @@
 // Grab element that are needed
 const list = document.querySelector('.list');
 const addBtn = document.querySelector('.add-person');
-
-const endpoint = "./people.json";
+const filterSearchInput = document.querySelector('#searchInput');
+const filterMonthInput = document.querySelector('#filtered-month');
+const formEl = document.querySelector('.form');
+const resetBtn = document.querySelector('.reset-btn');
 
 // Fetch data from people.json file
 async function fetchPerson() {
   const response = await fetch("./people.json");
   let data = await response.json();
 
+  const filterList = e => {
+    displayPerson(e, filterSearchInput.value, filterMonthInput.value);
+  };
+
+  const resetForm = e => {
+    formEl.reset();
+    displayPerson();
+  };
+
   // Display person list
-  const displayPerson = () => {
+  const displayPerson = (event, filterPerson, filterMonth) => {
+    let sortedBirt = data.sort((a, b) => a.birthday - b.birthday);
+    // Filtered the data here
+    if (filterPerson) {
+      sortedBirt = sortedBirt.filter(person => {
+        let lowerCaseTitle = person.lastName.toLowerCase();
+
+        let lowerCaseFilter = filterPerson.toLowerCase();
+        if (lowerCaseTitle.includes(lowerCaseFilter)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
+    // if (filterMonth) {
+    //  sortedBirt = sortedBirt.filter(person => person.style === filterMonth);
+    // }
+
     //Display the date
-    const html = data.map(person => {
+    const html = sortedBirt.map(person => {
       const personBirt = new Date(person.birthday);
       let newDay = personBirt.getDay();
       const newMonth = personBirt.toLocaleString('en-us', { month: 'long' });
@@ -79,10 +108,10 @@ async function fetchPerson() {
   // edit the popup
   function editPopup(id) {
     const findId = data.find(person => person.id === id);
-    let peopleBithday = new Date(findId.birthday);
-    let newDay = peopleBithday.getDay();
-    const newMonth = peopleBithday.toLocaleString('en-us', { month: 'long' });
-    const year = peopleBithday.getFullYear();
+    let peopleBirthday = new Date(findId.birthday);
+    let newDay = peopleBirthday.getDay();
+    const newMonth = peopleBirthday.toLocaleString('en-us', { month: 'long' });
+    const year = peopleBirthday.getFullYear();
     const birthday = `${newDay}-${newMonth}-${year}`;
     return new Promise(async function (resolve) {
       const popup = document.createElement('form');
@@ -90,15 +119,15 @@ async function fetchPerson() {
       popup.insertAdjacentHTML('afterbegin', `
               <fieldset>
                 <label for="name"></label>
-                <input type="text" name="lastName" value="${findId.lastName}"/>
+                <input type="text" name="lastName" id="name"> value="${findId.lastName}"/>
               </fieldset>
               <fieldset>
                 <label for="firstName"></label>
-                <input type="text" name="firstName" value="${findId.firstName}"/>
+                <input type="text" name="firstName" id="firstName" value="${findId.firstName}"/>
               </fieldset>
               <fieldset>
                 <label for="birthday"></label>
-                <input type="text" name="birthday" value="${birthday}" id="birthday"/>
+                <input type="text" name="birthday" id="birthday" value="${birthday}" id="birthday"/>
               </fieldset>
               <div>
                 <button type="submit" class="submit-btn">Save the form</button>
@@ -189,7 +218,8 @@ async function fetchPerson() {
     list.dispatchEvent(new CustomEvent('listUpdated'));
   };
 
-  const addPerson = (e) => {
+  // Add a person in the list
+  const addPerson = () => {
     const form = document.createElement('form');
     form.classList.add('addPopup');
     form.insertAdjacentHTML('afterbegin', `
@@ -262,7 +292,9 @@ async function fetchPerson() {
   list.addEventListener('click', editPopupPartener);
   list.addEventListener('listUpdated', displayPerson);
   list.addEventListener('listUpdated', setToLocalStorage);
-
+  filterSearchInput.addEventListener('keyup', filterList);
+  filterMonthInput.addEventListener('change', filterList);
+  resetBtn.addEventListener('click', resetForm)
   restoreFromLocalStorage();
 
 }; fetchPerson();

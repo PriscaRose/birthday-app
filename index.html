@@ -13,6 +13,30 @@
         <h1>Birthday list</h1>
         <button type="submit" class="add-person">Add a person</button>
       </header>
+      <form class="form">
+        <fieldset>
+          <label for="searchInput"></label>
+          <input type="search" id="searchInput" placeholder="search">
+        </fieldset>
+        <fieldset>
+          <label for="filtered-month"></label>
+          <select name="month" id="filtered-month">
+            <option value="january">January</option>
+            <option value="february">February</option>
+            <option value="march">March</option>
+            <option value="april">April</option>
+            <option value="may">May</option>
+            <option value="june">June</option>
+            <option value="july">July</option>
+            <option value="august">August</option>
+            <option value="september">September</option>
+            <option value="october">October</option>
+            <option value="november">November</option>
+            <option value="december">December</option>
+          </select>
+        </fieldset>
+        <button type="button" class="reset-btn">Reset</button>
+      </form>
       <ul class="list"></ul>
     </article>
 		<script src="script.js"></script>
