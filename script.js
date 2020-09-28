@@ -36,9 +36,6 @@ async function fetchPerson() {
         }
       });
     }
-    // if (filterMonth) {
-    //  sortedBirt = sortedBirt.filter(person => person.style === filterMonth);
-    // }
 
     //Display the date
     const html = sortedBirt.map(person => {
@@ -47,7 +44,7 @@ async function fetchPerson() {
       const newMonth = personBirt.toLocaleString('en-us', { month: 'long' });
       const newYear = new Date();
       const year = newYear.getFullYear();
-      const birthday = `${newDay}-${newMonth}-${year}`;
+      const birthday = `${newDay + 1}-${newMonth}-${year}`;
       const personAge = newYear.getFullYear() - personBirt.getFullYear();
       if (newDay == 1 || newDay == 21 || newDay == 31) {
         newDay += "st";
