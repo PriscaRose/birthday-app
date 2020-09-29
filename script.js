@@ -37,6 +37,21 @@ async function fetchPerson() {
       });
     }
 
+    if (filterMonth) {
+      sortedBirt = sortedBirt.filter(person => {
+        let myMonth = new Date(person.birthday);
+        let myBirthMonth = myMonth.toLocaleString('en-us', { month: 'long' });
+        let toLowerCaseMonth = myBirthMonth.toLowerCase();
+        let toLowerCaseFilterMonth = filterMonth.toLowerCase();
+
+        if(toLowerCaseMonth == toLowerCaseFilterMonth) {
+          return true;
+        }else {
+          return false;
+        }
+      })
+    }
+
     //Display the date
     const html = sortedBirt.map(person => {
       const personBirt = new Date(person.birthday);
@@ -257,8 +272,6 @@ async function fetchPerson() {
         id: Date.now(),
       };
       data.push(newPerson);
-      // displayPerson(data);
-
       list.dispatchEvent(new CustomEvent('listUpdated'));
       formEl.reset();
       destroyPopup(formEl);
@@ -291,7 +304,7 @@ async function fetchPerson() {
   list.addEventListener('listUpdated', setToLocalStorage);
   filterSearchInput.addEventListener('keyup', filterList);
   filterMonthInput.addEventListener('change', filterList);
-  resetBtn.addEventListener('click', resetForm)
+  resetBtn.addEventListener('click', resetForm);
   restoreFromLocalStorage();
 
 }; fetchPerson();
