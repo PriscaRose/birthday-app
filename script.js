@@ -23,6 +23,7 @@ async function fetchPerson() {
   // Display person list
   const displayPerson = (event, filterPerson, filterMonth) => {
     let sortedBirt = data.sort((a, b) => a.birthday - b.birthday);
+
     // Filtered the data here
     if (filterPerson) {
       sortedBirt = sortedBirt.filter(person => {
@@ -37,6 +38,7 @@ async function fetchPerson() {
       });
     }
 
+  // Filter the birthday month
     if (filterMonth) {
       sortedBirt = sortedBirt.filter(person => {
         let myMonth = new Date(person.birthday);
