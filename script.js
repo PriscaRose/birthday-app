@@ -28,7 +28,6 @@ async function fetchPerson() {
     if (filterPerson) {
       sortedBirt = sortedBirt.filter(person => {
         let lowerCaseTitle = person.lastName.toLowerCase();
-
         let lowerCaseFilter = filterPerson.toLowerCase();
         if (lowerCaseTitle.includes(lowerCaseFilter)) {
           return true;
@@ -39,20 +38,20 @@ async function fetchPerson() {
     }
 
   // Filter the birthday month
-    if (filterMonth) {
-      sortedBirt = sortedBirt.filter(person => {
-        let myMonth = new Date(person.birthday);
-        let myBirthMonth = myMonth.toLocaleString('en-us', { month: 'long' });
-        let toLowerCaseMonth = myBirthMonth.toLowerCase();
-        let toLowerCaseFilterMonth = filterMonth.toLowerCase();
+  else if (filterMonth) {
+    sortedBirt = sortedBirt.filter(person => {
+      let myMonth = new Date(person.birthday);
+      let myBirthMonth = myMonth.toLocaleString('en-us', { month: 'long' });
+      let toLowerCaseMonth = myBirthMonth.toLowerCase();
+      let toLowerCaseFilterMonth = filterMonth.toLowerCase();
 
-        if(toLowerCaseMonth == toLowerCaseFilterMonth) {
-          return true;
-        }else {
-          return false;
-        }
-      })
-    }
+      if(toLowerCaseMonth == toLowerCaseFilterMonth) {
+        return true;
+      }else {
+        return false;
+      }
+    })
+  }
 
     //Display the date
     const html = sortedBirt.map(person => {
