@@ -24,7 +24,7 @@ async function fetchPerson() {
   const displayPerson = (event, filterPerson, filterMonth) => {
     let sortedBirt = data.sort((a, b) => a.birthday - b.birthday);
 
-    // Filtered the data here
+    // Filtered the firstName here
     if (filterPerson) {
       sortedBirt = sortedBirt.filter(person => {
         let lowerCaseTitle = person.lastName.toLowerCase();
