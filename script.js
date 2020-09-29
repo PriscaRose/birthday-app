@@ -133,7 +133,7 @@ async function fetchPerson() {
       popup.insertAdjacentHTML('afterbegin', `
               <fieldset>
                 <label for="name"></label>
-                <input type="text" name="lastName" id="name"> value="${findId.lastName}"/>
+                <input type="text" name="lastName" id="name" value="${findId.lastName}"/>
               </fieldset>
               <fieldset>
                 <label for="firstName"></label>
