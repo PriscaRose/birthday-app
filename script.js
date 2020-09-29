@@ -1,10 +1,6 @@
-// Grab element that are needed
-const list = document.querySelector('.list');
-const addBtn = document.querySelector('.add-person');
-const filterSearchInput = document.querySelector('#searchInput');
-const filterMonthInput = document.querySelector('#filtered-month');
-const formEl = document.querySelector('.form');
-const resetBtn = document.querySelector('.reset-btn');
+import {list, addBtn, filterMonthInput, filterSearchInput, formEl, resetBtn} from './elements.js';
+import { handleClick } from './handlers.js';
+import { setTimeOut, destroyPopup } from './utils.js';
 
 // Fetch data from people.json file
 async function fetchPerson() {
@@ -26,7 +22,7 @@ async function fetchPerson() {
 
     // Filtered the firstName here
     if (filterPerson) {
-      sortedBirt = sortedBirt.filter(person => {
+        sortedBirt = sortedBirt.filter(person => {
         let lowerCaseTitle = person.firstName.toLowerCase();
         let lowerCaseFilter = filterPerson.toLowerCase();
         if (lowerCaseTitle.includes(lowerCaseFilter)) {
@@ -104,23 +100,9 @@ async function fetchPerson() {
     list.innerHTML = html.join('');
   };
 
-  // Set the time that you want to run another data
-  const setTimeOut = (ms = 0) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  };
-
-  // This function destroy the popup
-  async function destroyPopup(popup) {
-    await setTimeOut(100);
-    // remove it from the DOM
-    popup.remove();
-    // remove it from the js memory
-    popup = null;
-  }
-
   // edit the popup
   function editPopup(id) {
-    const findId = data.find(person => person.id === id);
+    let findId = data.find(person => person.id == id);
     let peopleBirthday = new Date(findId.birthday);
     let newDay = peopleBirthday.getDay();
     const newMonth = peopleBirthday.toLocaleString('en-us', { month: 'long' });
@@ -140,7 +122,7 @@ async function fetchPerson() {
               </fieldset>
               <fieldset>
                 <label for="birthday"></label>
-                <input type="text" name="birthday" id="birthday" value="${birthday}" id="birthday"/>
+                <input type="text" name="birthday" id="birthday" value="${birthday}"/>
               </fieldset>
               <div>
                 <button type="submit" class="submit-btn">Save the form</button>
@@ -158,6 +140,7 @@ async function fetchPerson() {
         destroyPopup(popup);
         list.dispatchEvent(new CustomEvent('listUpdated'));
       });
+
       // insert tht popup in the DOM
       document.body.appendChild(popup);
       //put a very small titmeout before we add the open class
@@ -174,49 +157,10 @@ async function fetchPerson() {
     }
   }
 
-  // Handle the cancel button the items from local storage
-  const handleClick = (e) => {
-    const deleteBtn = e.target.closest('button.delete');
-    if (deleteBtn) {
-      return new Promise(async function (resolve) {
-        const div = document.createElement('div');
-        div.classList.add('deleteBtnContainer');
-        div.insertAdjacentHTML('afterbegin', `
-          <p>Are you sure you want to delete it?</p>
-          <button type="button" class="confirm">Yes</button>
-          <button type="button" class="cancel">No</button>
-      `);
-        document.body.appendChild(div);
-        //put a very small titmeout before we add the open class
-        await setTimeOut(10);
-        div.classList.add('open');
-      });
-    }
-
-    if (e.target.closest('.cancel')) {
-      const divEl = document.querySelector('.deleteBtnContainer');
-      destroyPopup(divEl);
-    }
-
-    if (e.target.matches('button.cancelForm')) {
-      const form = document.querySelector('.popup');
-      destroyPopup(form);
-      displayPerson();
-    };
-
-    if (e.target.matches('button.cancelAddForm')) {
-      const addForm = document.querySelector('.addPopup');
-      destroyPopup(addForm);
-      displayPerson();
-    };
-
-  }
-
   // Handle the delete button
   const handleDeleteBtn = e => {
     const deleteBtnEl = e.target.closest('button.confirm');
     if (deleteBtnEl) {
-      console.log(e.target)
       const btn = document.querySelector('.delete');
       const id = btn.value;
       deleteBtn(id);
@@ -227,7 +171,6 @@ async function fetchPerson() {
 
   const deleteBtn = (id) => {
     data = data.filter(person => person.id !== id || person.id != id);
-    console.log(data);
     list.dispatchEvent(new CustomEvent('listUpdated'));
   };
 
