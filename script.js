@@ -169,9 +169,8 @@ async function fetchPerson() {
 
   // Handle the delete button
   const handleDeleteBtn = e => {
-    const deleteBtnEl = e.target.closest('button.confirm');
+    const deleteBtnEl = e.target.matches('button.confirm');
     if (deleteBtnEl) {
-      console.log(e.target)
       const btn = document.querySelector('.delete');
       const id = btn.value;
       deleteBtn(id);
@@ -182,7 +181,6 @@ async function fetchPerson() {
 
   const deleteBtn = (id) => {
     data = data.filter(person => person.id != id);
-    console.log(data);
     list.dispatchEvent(new CustomEvent('listUpdated'));
   };
 
