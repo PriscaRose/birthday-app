@@ -1,5 +1,6 @@
 import { list, addBtn, filterSearchInput, filterMonthInput, formEl, resetBtn } from './elements.js';
 import { handleClick } from './handlers.js';
+
 // Fetch data from people.json file
 async function fetchPerson() {
   const response = await fetch("./people.json");
