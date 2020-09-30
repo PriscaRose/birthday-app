@@ -1,5 +1,4 @@
 // Grab element that are needed
-
 export const list = document.querySelector('.list');
 export const addBtn = document.querySelector('.add-person');
 export const filterSearchInput = document.querySelector('#searchInput');

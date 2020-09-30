@@ -1,7 +1,5 @@
-import {list, addBtn, filterMonthInput, filterSearchInput, formEl, resetBtn} from './elements.js';
+import { list, addBtn, filterSearchInput, filterMonthInput, formEl, resetBtn } from './elements.js';
 import { handleClick } from './handlers.js';
-import { setTimeOut, destroyPopup } from './utils.js';
-
 // Fetch data from people.json file
 async function fetchPerson() {
   const response = await fetch("./people.json");
@@ -19,11 +17,11 @@ async function fetchPerson() {
   // Display person list
   const displayPerson = (event, filterPerson, filterMonth) => {
     let sortedBirt = data.sort((a, b) => a.birthday - b.birthday);
-
-    // Filtered the firstName here
+    // Filtered the data here
     if (filterPerson) {
-        sortedBirt = sortedBirt.filter(person => {
-        let lowerCaseTitle = person.firstName.toLowerCase();
+      sortedBirt = sortedBirt.filter(person => {
+        let lowerCaseTitle = person.lastName.toLowerCase();
+
         let lowerCaseFilter = filterPerson.toLowerCase();
         if (lowerCaseTitle.includes(lowerCaseFilter)) {
           return true;
@@ -32,22 +30,20 @@ async function fetchPerson() {
         }
       });
     }
+    else if (filterMonth) {
+      sortedBirt = sortedBirt.filter(person => {
+        let month = new Date(person.birthday);
+        let newMonth = month.toLocaleString('en-us', { month: 'long' });
+        let toLowerCAseNewMonth = newMonth.toLowerCase();
+        let lowerCaseFilterMonth = filterMonth.toLowerCase();
 
-  // Filter the birthday month
-  else if (filterMonth) {
-    sortedBirt = sortedBirt.filter(person => {
-      let myMonth = new Date(person.birthday);
-      let myBirthMonth = myMonth.toLocaleString('en-us', { month: 'long' });
-      let toLowerCaseMonth = myBirthMonth.toLowerCase();
-      let toLowerCaseFilterMonth = filterMonth.toLowerCase();
-
-      if(toLowerCaseMonth == toLowerCaseFilterMonth) {
-        return true;
-      }else {
-        return false;
-      }
-    })
-  }
+        if (toLowerCAseNewMonth == lowerCaseFilterMonth) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
 
     //Display the date
     const html = sortedBirt.map(person => {
@@ -100,9 +96,23 @@ async function fetchPerson() {
     list.innerHTML = html.join('');
   };
 
+  // Set the time that you want to run another data
+  const setTimeOut = (ms = 0) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  };
+
+  // This function destroy the popup
+  async function destroyPopup(popup) {
+    await setTimeOut(100);
+    // remove it from the DOM
+    popup.remove();
+    // remove it from the js memory
+    popup = null;
+  }
+
   // edit the popup
   function editPopup(id) {
-    let findId = data.find(person => person.id == id);
+    const findId = data.find(person => person.id == id);
     let peopleBirthday = new Date(findId.birthday);
     let newDay = peopleBirthday.getDay();
     const newMonth = peopleBirthday.toLocaleString('en-us', { month: 'long' });
@@ -114,7 +124,7 @@ async function fetchPerson() {
       popup.insertAdjacentHTML('afterbegin', `
               <fieldset>
                 <label for="name"></label>
-                <input type="text" name="lastName" id="name" value="${findId.lastName}"/>
+                <input type="text" name="lastName" id="name"> value="${findId.lastName}"/>
               </fieldset>
               <fieldset>
                 <label for="firstName"></label>
@@ -122,7 +132,7 @@ async function fetchPerson() {
               </fieldset>
               <fieldset>
                 <label for="birthday"></label>
-                <input type="text" name="birthday" id="birthday" value="${birthday}"/>
+                <input type="text" name="birthday" id="birthday" value="${birthday}" id="birthday"/>
               </fieldset>
               <div>
                 <button type="submit" class="submit-btn">Save the form</button>
@@ -140,7 +150,6 @@ async function fetchPerson() {
         destroyPopup(popup);
         list.dispatchEvent(new CustomEvent('listUpdated'));
       });
-
       // insert tht popup in the DOM
       document.body.appendChild(popup);
       //put a very small titmeout before we add the open class
@@ -161,6 +170,7 @@ async function fetchPerson() {
   const handleDeleteBtn = e => {
     const deleteBtnEl = e.target.closest('button.confirm');
     if (deleteBtnEl) {
+      console.log(e.target)
       const btn = document.querySelector('.delete');
       const id = btn.value;
       deleteBtn(id);
@@ -170,7 +180,8 @@ async function fetchPerson() {
   }
 
   const deleteBtn = (id) => {
-    data = data.filter(person => person.id !== id || person.id != id);
+    data = data.filter(person => person.id != id);
+    console.log(data);
     list.dispatchEvent(new CustomEvent('listUpdated'));
   };
 
@@ -207,7 +218,6 @@ async function fetchPerson() {
     const displayNewPer = e => {
       e.preventDefault();
       const formEl = e.target;
-      console.log(formEl);
       const newPerson = {
         lastName: formEl.lastName.value,
         firstName: formEl.firstName.value,
