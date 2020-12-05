@@ -1,6 +1,5 @@
 
 ## Birthday app
-
  ### 1- The structure of my project
 
  First, I generated the basic html in the index.html file. Second, I grabbed all the elements which am going to use. Third, I created a fucntion that fecth the people birthday. After that I created many function inside of the fecth function because all the function based on it.Fistly, I generated the function that will display the list of the person's birthday in the DOM. Secondly, I generated a function that set the time which the user has to wait while they use the app. Thirdly, I generated a function that destroy the popup so that every time the user has done something the popup will disappear. Forthly, I created a function that allows the user to edit the data. After that, I created another function that allows a user to cancel the popup. And then, I geneated a function that allows the user to delete the the birthday list. Finaly, I listened to all events.

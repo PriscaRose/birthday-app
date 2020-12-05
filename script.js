@@ -21,8 +21,7 @@ async function fetchPerson() {
     // Filtered the data here
     if (filterPerson) {
       sortedBirt = sortedBirt.filter(person => {
-        let lowerCaseTitle = person.lastName.toLowerCase();
-
+        let lowerCaseTitle = person.lastName.toLowerCase() || person.firstName.toLowerCase();
         let lowerCaseFilter = filterPerson.toLowerCase();
         if (lowerCaseTitle.includes(lowerCaseFilter)) {
           return true;
