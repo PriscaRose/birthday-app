@@ -127,11 +127,41 @@ button {
   border-color: transparent;
 }
 
-form {
+.form {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
   margin-block-end: 3rem;
 }
+
+.form .fieldset {
+  border-color: transparent;
+}
+
+.form .fieldset {
+  width: 30%;
+}
+
+.form input,
+.form select {
+  width: 100%;
+}
+
+.form input,
+.form select,
+.form button {
+  border-radius: 5px;
+  padding-top: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 8px;
+}
+
+.form button {
+  margin-top: 18px;
+}
+
 
 .add-person,
 .confirm,
