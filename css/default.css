@@ -1,0 +1,48 @@
+body {
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+fieldset,
+input,
+select {
+  border-color: transparent;
+}
+
+select:hover,
+input:hover {
+  background-color: #bae8e8;
+}
+
+img {
+  border-radius: 50%;
+  max-width: 20%;
+}
+
+button {
+  text-transform: uppercase;
+  border-color: transparent;
+}
+
+span {
+  font-size: 14px;
+}
+
+label {
+  color: #272343;
+}

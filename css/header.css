@@ -1,0 +1,32 @@
+header {
+  background-color: #e53170;
+  display: flex;
+  justify-content: center;
+  margin-block-end: 2rem;
+
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #fffffe;
+  font-family: serif;
+  font-size: 20px;
+}
+
+header,
+.items {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 12px;
+}
+
+@media (min-width: 800px) {
+
+  h1 {
+    font-size: 40px;
+  }
+
+}

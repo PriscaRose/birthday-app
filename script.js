@@ -73,7 +73,7 @@ async function fetchPerson() {
                 <li class="items" id="${person.id}">
                   <img class="image" src="${person.picture}" alt="">
                   <div class="wrapper">
-                    <div class="name-wrapper"
+                    <div class="name-wrapper">
                       <span class="first-name">${person.firstName}</span>
                       <span class="last-name">${person.lastName}</span>
                     </div>
@@ -82,12 +82,8 @@ async function fetchPerson() {
                   <div>
                     <span class="days">${numberOfDays} days</span>
                   </div>
-                  <button class="edit" value="${person.id}" aria-label="">
-                    <img class="edit-icon" src="./assets/edit-icon.png" alt="edit">
-                  </button>
-                  <button class="delete" value="${person.id}">
-                    <img src="./assets/trash.svg">
-                  </button>
+                  <button class="edit" value="${person.id}" aria-label="">edit</button>
+                  <button class="delete" value="${person.id}">delete</button>
                 </li>
             `;
     });
@@ -118,25 +114,30 @@ async function fetchPerson() {
     const newMonth = peopleBirthday.toLocaleString('en-us', { month: 'long' });
     const year = peopleBirthday.getFullYear();
     const birthday = `${newDay}-${newMonth}-${year}`;
-    return new Promise(async function (resolve) {
+    return new Promise(async function () {
       const popup = document.createElement('form');
       popup.classList.add('popup');
       popup.insertAdjacentHTML('afterbegin', `
-              <fieldset>
-                <label for="name"></label>
-                <input type="text" name="lastName" id="name"> value="${findId.lastName}"/>
-              </fieldset>
-              <fieldset>
-                <label for="firstName"></label>
-                <input type="text" name="firstName" id="firstName" value="${findId.firstName}"/>
-              </fieldset>
-              <fieldset>
-                <label for="birthday"></label>
-                <input type="text" name="birthday" id="birthday" value="${birthday}" id="birthday"/>
-              </fieldset>
-              <div>
-                <button type="submit" class="submit-btn">Save the form</button>
-                <button type="button" class="cancelForm">Cancel the form</button>
+              <div class="popup--container">
+                <h2 class="popup__heading">Edit the birthday reminder here</h2>
+                <div class="popup--wrapper">
+                  <fieldset class="popup__fieldset">
+                    <label for="name">LastName</label>
+                    <input type="text" class="popup__input" name="lastName" id="name" value="${findId.lastName}"/>
+                  </fieldset>
+                  <fieldset class="popup__fieldset">
+                    <label for="firstName">Firstname</label>
+                    <input type="text" class="popup__input" name="firstName" id="firstName" value="${findId.firstName}"/>
+                  </fieldset>
+                  <feldset class="popup__fieldset">
+                    <label for="birthday">Birthday</label>
+                    <input type="text" class="popup__input" name="birthday" id="birthday" value="${birthday}" />
+                  </feldset>
+                </div>
+                <div class="popup__button--wrapper">
+                  <button type="submit" class="submit-btn">Save</button>
+                  <button type="button" class="cancelForm">Cancel</button>
+                </div>
               </div>
             `);
 
@@ -188,27 +189,31 @@ async function fetchPerson() {
     const form = document.createElement('form');
     form.classList.add('addPopup');
     form.insertAdjacentHTML('afterbegin', `
-              <h2> Add a new person's birthday here</h2>
-              <fieldset>
-                <label for="picture">Add a picture</label>
-                <input type="url" class="picture" id="picture" name="picture" value="" required/>
-              </fieldset>
-              <fieldset>
-                <label for="name">Your last name</label>
-                <input type="text" id="name" name="lastName" value="" required/>
-              </fieldset>
-              <fieldset>
-                <label for="firstName">Your first name</label>
-                <input type="text" id="firstName" name="firstName" value="" required/>
-              </fieldset>
-              <fieldset>
-                <label for="birthday">Your birthday</label>
-                <input type="date" id="birthday" name="birthday" value="" required/>
-              </fieldset>
-              <div>
-                <button type="submit" class="submit-btn">Save the form</button>
-                <button type="button" class="cancelAddForm">Cancel the form</button>
+            <div class="addPopup--container">
+              <h2 class="addPopup__heading"> Add a new person's birthday here</h2>
+              <div class="addPopup--wrapper">
+                <fieldset class="addPopup__fieldset">
+                  <label for="picture">Add a picture</label>
+                  <input type="url"  class="addPopup__input"class="picture" id="picture" name="picture" value="" required/>
+                </fieldset>
+                <fieldset class="addPopup__fieldset">
+                  <label for="name">Your last name</label>
+                  <input type="text" class="addPopup__input" id="name" name="lastName" value="" required/>
+                </fieldset>
+                <fieldset class="addPopup__fieldset">
+                  <label for="firstName">Your first name</label>
+                  <input type="text" class="addPopup__input" id="firstName" name="firstName" value="" required/>
+                </fieldset>
+                <fieldset class="addPopup__fieldset">
+                  <label for="birthday">Your birthday</label>
+                  <input type="date" class="addPopup__input" id="birthday" name="birthday" value="" required/>
+                </fieldset>
               </div>
+              <div class="addPopup--wrapper__button">
+                <button type="submit" class="submit-btn">Save</button>
+                <button type="button" class="cancelAddForm">Cancel</button>
+              </div>
+            </div>
             `);
 
     document.body.appendChild(form);

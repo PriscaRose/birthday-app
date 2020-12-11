@@ -8,9 +8,13 @@ export const handleClick = (e) => {
       const div = document.createElement('div');
       div.classList.add('deleteBtnContainer');
       div.insertAdjacentHTML('afterbegin', `
-        <p>Are you sure you want to delete it?</p>
-        <button type="button" class="confirm">Yes</button>
-        <button type="button" class="cancel">No</button>
+        <div class="deleteBtnWrapper">
+          <p class="confirmParagraph">Are you sure you want to delete it?</p>
+          <div class="btnWrapper">
+            <button type="button" class="confirm">Yes</button>
+            <button type="button" class="cancel">No</button>
+          </div>
+        </div>
     `);
       document.body.appendChild(div);
       //put a very small titmeout before we add the open class

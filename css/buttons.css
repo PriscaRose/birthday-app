@@ -1,0 +1,93 @@
+.delete,
+.edit {
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  color: transparent;
+  background-color: transparent;
+  padding: 0;
+  border-color: transparent;
+}
+
+.edit {
+  background-image: url('../assets/edit.svg');
+}
+
+.delete {
+  background-image: url('../assets/trash.svg');
+}
+
+.reset-btn {
+  margin-top: 18px;
+  background-color: cadetblue;
+  color: white
+}
+
+
+.deleteBtnContainer.open {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.wrapper-btn {
+  display: flex;
+}
+
+.confirm {
+  margin-right: 32px;
+}
+
+.confirm,
+.cancel,
+.add-person {
+  background-color: #e53170;
+  padding-top: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 8px;
+  box-shadow: 0 9px #999999;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.add-person:hover,
+.confirm:hover,
+.cancel:hover,
+.add-person:hover,
+.confirm:hover,
+.cancel:hover,
+.add-person:active,
+.confirm:active,
+.cancel:active,
+.cancelAddForm:active,
+.submit-btn:active {
+  color: #fffffe;
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.confirm,
+.cancel,
+.cancelAddForm,
+.submit-btn,
+.cancelForm {
+  color: white;
+  background-color: #272343;
+  box-shadow: 0 9px #999;
+  border-radius: 5px;
+}
+
+.submit-btn {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: 32px;
+}
+
+.submit-btn {
+  margin-bottom: 1rem;
+}

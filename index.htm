@@ -4,38 +4,38 @@
 		<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
 		<title>Birthday list</title>
 	</head>
 	<body>
     <article>
       <div class="container">
         <header>
-          <h1>🎂🎂 Birthday reminder 🎂🎂</h1>
-          <button type="submit" class="add-person">Add a person</button>
+          <h1>🎂 Birthday reminder 🎂</h1>
           </header>
+          <button type="submit" class="add-person">Add a new person</button>
           <form class="form">
           <fieldset class="fieldset">
-          <label for="searchInput"></label>
-          <input type="search" id="searchInput" placeholder="search">
+            <label for="searchInput">Filtered by name</label>
+            <input type="search" id="searchInput" placeholder="search">
           </fieldset>
           <fieldset class="fieldset">
-          <label for="filtered-month"></label>
-          <select name="month" id="filtered-month">
-          <option value="month"></option>
-          <option value="january">January</option>
-          <option value="february">February</option>
-          <option value="march">March</option>
-          <option value="april">April</option>
-          <option value="may">May</option>
-          <option value="june">June</option>
-          <option value="july">July</option>
-          <option value="august">August</option>
-          <option value="september">September</option>
-          <option value="october">October</option>
-          <option value="november">November</option>
-          <option value="december">December</option>
-          </select>
+            <label for="filtered-month">Filtered by months</label>
+            <select name="month" id="filtered-month">
+              <option value="month">months</option>
+              <option value="january">January</option>
+              <option value="february">February</option>
+              <option value="march">March</option>
+              <option value="april">April</option>
+              <option value="may">May</option>
+              <option value="june">June</option>
+              <option value="july">July</option>
+              <option value="august">August</option>
+              <option value="september">September</option>
+              <option value="october">October</option>
+              <option value="november">November</option>
+              <option value="december">December</option>
+            </select>
           </fieldset>
           <button type="button" class="reset-btn">Reset</button>
           </form>
