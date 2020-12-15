@@ -11,6 +11,10 @@
   border-color: transparent;
 }
 
+.add-person {
+  background: #EF4565;
+}
+
 .edit {
   background-image: url('../assets/edit.svg');
 }
@@ -42,19 +46,16 @@
 .confirm,
 .cancel,
 .add-person {
-  background-color: #e53170;
-  padding-top: 8px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 8px;
-  box-shadow: 0 9px #999999;
+  padding-top: 15px;
+  padding-left: 18px;
+  padding-right: 11px;
+  padding-bottom: 14px;
   text-align: center;
   border-radius: 5px;
-  margin-top: 1.5rem;
-  margin-bottom: 3rem;
+  color: white;
 }
 
-.add-person:hover,
+/* .add-person:hover,
 .confirm:hover,
 .cancel:hover,
 .add-person:hover,
@@ -90,4 +91,4 @@
 
 .submit-btn {
   margin-bottom: 1rem;
-}
+} */

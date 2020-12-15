@@ -1,4 +1,4 @@
-import { list, addBtn, filterSearchInput, filterMonthInput, formEl, resetBtn } from './elements.js';
+import { list, addBtn, filterSearchInput, filterMonthInput, formEl } from './elements.js';
 import { handleClick } from './handlers.js';
 
 // Fetch data from people.json file
@@ -10,10 +10,6 @@ async function fetchPerson() {
     displayPerson(e, filterSearchInput.value, filterMonthInput.value);
   };
 
-  const resetForm = e => {
-    formEl.reset();
-    displayPerson();
-  };
 
   // Display person list
   const displayPerson = (event, filterPerson, filterMonth) => {
@@ -64,7 +60,6 @@ async function fetchPerson() {
         newDay += "th";
       }
 
-      const birthdayPers = `Turns ${personAge + 1} on the ${newMonth} ${newDay}`;
       const days = new Date(birthday).getTime();
       const numberOfDays = Math.floor(-(newYear - days) / 86400000);
 
@@ -77,14 +72,16 @@ async function fetchPerson() {
                       <span class="first-name">${person.firstName}</span>
                       <span class="last-name">${person.lastName}</span>
                     </div>
-                    <span class="birth_date">${birthdayPers}</span>
+                    <p class="birth_date">Turns <span class="age">${personAge + 1}</span> on ${newMonth}  ${newDay}</p>
                   </div>
                   <div>
                     <span class="days">${numberOfDays} days</span>
+                    <div class="btn--wrapper">
+                      <button class="edit" value="${person.id}" aria-label="">edit</button>
+                      <button class="delete" value="${person.id}">delete</button>
+                    </div>
                   </div>
-                  <button class="edit" value="${person.id}" aria-label="">edit</button>
-                  <button class="delete" value="${person.id}">delete</button>
-                </li>
+                  </li>
             `;
     });
 
@@ -261,7 +258,6 @@ async function fetchPerson() {
   list.addEventListener('listUpdated', setToLocalStorage);
   filterSearchInput.addEventListener('keyup', filterList);
   filterMonthInput.addEventListener('change', filterList);
-  resetBtn.addEventListener('click', resetForm);
   restoreFromLocalStorage();
 
 }; fetchPerson();

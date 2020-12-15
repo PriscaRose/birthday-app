@@ -1,5 +1,8 @@
 body {
-  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  font-family: 'Rubik', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  background: #D8EEFE;
   margin: 0;
   padding: 0;
   font-size: 16px;
@@ -30,19 +33,15 @@ input:hover {
 }
 
 img {
-  border-radius: 50%;
-  max-width: 20%;
+  max-width: 92px;
+  max-height: 94px;
+  border-radius: 5px;
 }
 
 button {
-  text-transform: uppercase;
   border-color: transparent;
 }
 
 span {
   font-size: 14px;
-}
-
-label {
-  color: #272343;
 }

@@ -1,0 +1,27 @@
+.form {
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-block-end: 3rem;
+}
+
+.form__fieldset {
+  border-color: transparent;
+}
+
+.form__label {
+  color: #094067;
+}
+
+.form__input,
+.form__select {
+  width: 100%;
+  border-radius: 5px;
+  padding-top: 15px;
+  padding-left: 18px;
+  padding-right: 11px;
+  padding-bottom: 14px;
+}
+
