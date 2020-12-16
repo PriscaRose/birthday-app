@@ -32,7 +32,7 @@ export async function fetchPerson() {
     let sortedBirt = data.sort((a, b) => a.birthday - b.birthday);
     // Filtered the data here
     if (filterPerson) {
-      sortedBirt = sortedBirt.filter(person => {
+      sortedBirt = data.filter(person => {
         let lowerCaseTitle = person.lastName.toLowerCase() || person.firstName.toLowerCase();
         let lowerCaseFilter = filterPerson.toLowerCase();
         if (lowerCaseTitle.includes(lowerCaseFilter)) {
@@ -43,7 +43,7 @@ export async function fetchPerson() {
       });
     }
     else if (filterMonth) {
-      sortedBirt = sortedBirt.filter(person => {
+      sortedBirt = data.filter(person => {
         let month = new Date(person.birthday);
         let newMonth = month.toLocaleString('en-us', { month: 'long' });
         let toLowerCAseNewMonth = newMonth.toLowerCase();
@@ -66,13 +66,6 @@ export async function fetchPerson() {
       const year = birthday.getFullYear();
       const today = new Date();
       let nextBirthday = setYear(birthday, today.getFullYear())
-      if (isToday(nextBirthday)) {
-        return nextBirthday;
-      }
-      // if the date is already behind us, we add + 1 to the year
-      if (isPast(nextBirthday)) {
-        nextBirthday = addYears(nextBirthday, 1);
-      }
 
       if (newDay == 1 || newDay == 21 || newDay == 31) {
         newDay += "st";
@@ -84,6 +77,31 @@ export async function fetchPerson() {
         newDay += "th";
       }
       const numberOfDays = differenceInCalendarDays(nextBirthday, today)
+
+      if (isToday(nextBirthday)) {
+        return `<li class="items" id="${person.id}">
+                  <h2>Happy birthady ${person.firstName} ${person.lastName}</h2>
+                  <img class="image" src="${person.picture}" alt="">
+                  <div class="wrapper">
+                    <div class="name-wrapper">
+                      <span class="first-name">${person.firstName}</span>
+                      <span class="last-name">${person.lastName}</span>
+                    </div>
+                    <p class="birth_date">Turns <span class="age">${birthdate}</span> on ${month} ${newDay}</p>
+                  </div>
+                  <div>
+                    <span class="days">${numberOfDays} days</span>
+                    <div class="btn--wrapper">
+                      <button class="edit" value="${person.id}">edit</button>
+                      <button class="delete" value="${person.id}">delete</button>
+                    </div>
+                  </div>
+                  </li>`;
+      }
+      // if the date is already behind us, we add + 1 to the year
+      if (isPast(nextBirthday)) {
+        nextBirthday = addYears(nextBirthday, 1);
+      }
 
       //Generate html
       return `

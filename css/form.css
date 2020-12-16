@@ -19,9 +19,23 @@
 .form__select {
   width: 100%;
   border-radius: 5px;
+}
+
+.form__input {
   padding-top: 15px;
   padding-left: 18px;
   padding-right: 11px;
   padding-bottom: 14px;
 }
 
+.form__select {
+  padding-top: 18px;
+  padding-left: 18px;
+  padding-right: 11px;
+  padding-bottom: 16px;
+}
+
+.form__fieldset,
+.add-person {
+  margin-top: 1rem;
+}
