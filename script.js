@@ -1,15 +1,31 @@
 import { list, addBtn, filterSearchInput, filterMonthInput, formEl } from './elements.js';
-import { handleClick } from './handlers.js';
+import {
+	lightFormat,
+	differenceInCalendarYears,
+	differenceInCalendarDays,
+	compareAsc,
+  isPast, 
+  addYears, 
+  setYear, 
+  isToday,
+} from 'date-fns';
 
 // Fetch data from people.json file
-async function fetchPerson() {
-  const response = await fetch("./people.json");
+export async function fetchPerson() {
+  const response = await fetch('https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/b17e08696906abeaac8bc260f57738eaa3f6abb1/birthdayPeople.json');
   let data = await response.json();
 
   const filterList = e => {
     displayPerson(e, filterSearchInput.value, filterMonthInput.value);
   };
 
+  const getAge = (date1, date2) => {
+    // This is a condition like if statement
+    date2 = date2 || new Date();
+    //Calculation
+    const diff = date2.getTime() - date1.getTime();
+    return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+ }
 
   // Display person list
   const displayPerson = (event, filterPerson, filterMonth) => {
@@ -43,13 +59,21 @@ async function fetchPerson() {
 
     //Display the date
     const html = sortedBirt.map(person => {
-      const personBirt = new Date(person.birthday);
-      let newDay = personBirt.getDay() + 1;
-      const newMonth = personBirt.toLocaleString('en-us', { month: 'long' });
-      const newYear = new Date();
-      const year = newYear.getFullYear();
-      const birthday = `${newDay + 1}-${newMonth}-${year}`;
-      const personAge = newYear.getFullYear() - personBirt.getFullYear();
+      const birthdate = getAge(new Date(person.birthday));
+      const birthday = new Date(person.birthday);
+      let newDay = birthday.getDay() + 1;
+      const month =  birthday.toLocaleString('en-us', { month: 'long' });
+      const year = birthday.getFullYear();
+      const today = new Date();
+      let nextBirthday = setYear(birthday, today.getFullYear())
+      if (isToday(nextBirthday)) {
+        return nextBirthday;
+      }
+      // if the date is already behind us, we add + 1 to the year
+      if (isPast(nextBirthday)) {
+        nextBirthday = addYears(nextBirthday, 1);
+      }
+
       if (newDay == 1 || newDay == 21 || newDay == 31) {
         newDay += "st";
       }
@@ -59,9 +83,7 @@ async function fetchPerson() {
       else {
         newDay += "th";
       }
-
-      const days = new Date(birthday).getTime();
-      const numberOfDays = Math.floor(-(newYear - days) / 86400000);
+      const numberOfDays = differenceInCalendarDays(nextBirthday, today)
 
       //Generate html
       return `
@@ -72,12 +94,12 @@ async function fetchPerson() {
                       <span class="first-name">${person.firstName}</span>
                       <span class="last-name">${person.lastName}</span>
                     </div>
-                    <p class="birth_date">Turns <span class="age">${personAge + 1}</span> on ${newMonth}  ${newDay}</p>
+                    <p class="birth_date">Turns <span class="age">${birthdate}</span> on ${month} ${newDay}</p>
                   </div>
                   <div>
                     <span class="days">${numberOfDays} days</span>
                     <div class="btn--wrapper">
-                      <button class="edit" value="${person.id}" aria-label="">edit</button>
+                      <button class="edit" value="${person.id}">edit</button>
                       <button class="delete" value="${person.id}">delete</button>
                     </div>
                   </div>
@@ -107,32 +129,32 @@ async function fetchPerson() {
   function editPopup(id) {
     const findId = data.find(person => person.id == id);
     let peopleBirthday = new Date(findId.birthday);
-    let newDay = peopleBirthday.getDay();
-    const newMonth = peopleBirthday.toLocaleString('en-us', { month: 'long' });
+    let days = peopleBirthday.getDay();
+    const month = peopleBirthday.getMonth();
     const year = peopleBirthday.getFullYear();
-    const birthday = `${newDay}-${newMonth}-${year}`;
+    const birthday = `${days}/${month}/${year}`;
     return new Promise(async function () {
       const popup = document.createElement('form');
       popup.classList.add('popup');
       popup.insertAdjacentHTML('afterbegin', `
               <div class="popup--container">
-                <h2 class="popup__heading">Edit the birthday reminder here</h2>
+                <h2 class="popup__heading">Edit ${findId.lastName} ${findId.firstName}</h2>
                 <div class="popup--wrapper">
                   <fieldset class="popup__fieldset">
-                    <label for="name">LastName</label>
+                    <label class="popup__label" for="name">LastName</label>
                     <input type="text" class="popup__input" name="lastName" id="name" value="${findId.lastName}"/>
                   </fieldset>
                   <fieldset class="popup__fieldset">
-                    <label for="firstName">Firstname</label>
+                    <label class="popup__label" for="firstName">Firstname</label>
                     <input type="text" class="popup__input" name="firstName" id="firstName" value="${findId.firstName}"/>
                   </fieldset>
                   <feldset class="popup__fieldset">
-                    <label for="birthday">Birthday</label>
+                    <label class="popup__label" for="birthday">Birthday</label>
                     <input type="text" class="popup__input" name="birthday" id="birthday" value="${birthday}" />
                   </feldset>
                 </div>
                 <div class="popup__button--wrapper">
-                  <button type="submit" class="submit-btn">Save</button>
+                  <button type="submit" class="submit-btn">Save changes</button>
                   <button type="button" class="cancelForm">Cancel</button>
                 </div>
               </div>
@@ -182,7 +204,8 @@ async function fetchPerson() {
   };
 
   // Add a person in the list
-  const addPerson = () => {
+  const addPerson = (e) => {
+    e.preventDefault();
     const form = document.createElement('form');
     form.classList.add('addPopup');
     form.insertAdjacentHTML('afterbegin', `
@@ -190,23 +213,23 @@ async function fetchPerson() {
               <h2 class="addPopup__heading"> Add a new person's birthday here</h2>
               <div class="addPopup--wrapper">
                 <fieldset class="addPopup__fieldset">
-                  <label for="picture">Add a picture</label>
+                  <label class="popup__label" for="picture">Add a picture</label>
                   <input type="url"  class="addPopup__input"class="picture" id="picture" name="picture" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">
-                  <label for="name">Your last name</label>
+                  <label class="popup__label" for="name">Your last name</label>
                   <input type="text" class="addPopup__input" id="name" name="lastName" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">
-                  <label for="firstName">Your first name</label>
+                  <label class="popup__label" for="firstName">Your first name</label>
                   <input type="text" class="addPopup__input" id="firstName" name="firstName" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">
-                  <label for="birthday">Your birthday</label>
+                  <label class="popup__label" for="birthday">Your birthday</label>
                   <input type="date" class="addPopup__input" id="birthday" name="birthday" value="" required/>
                 </fieldset>
               </div>
-              <div class="addPopup--wrapper__button">
+              <div class="addPopup__button--wrapper">
                 <button type="submit" class="submit-btn">Save</button>
                 <button type="button" class="cancelAddForm">Cancel</button>
               </div>
@@ -233,6 +256,49 @@ async function fetchPerson() {
 
     form.addEventListener('submit', displayNewPer);
   };
+
+  // Handle click buttons
+  const handleClick = (e) => {
+    const buttons = e.target;
+    const deleteBtn = e.target.closest('button.delete');
+    const findIdToDelete = data.find(person => person.id == buttons.value);
+
+    if (deleteBtn) {
+      return new Promise(async function (resolve) {
+        const div = document.createElement('div');
+        div.classList.add('deleteBtnContainer');
+        div.insertAdjacentHTML('afterbegin', `
+          <div class="deleteBtnWrapper">
+            <p class="confirmParagraph">Are you sure you want to delete ${findIdToDelete.lastName} ${findIdToDelete.firstName}?</p>
+            <div class="btnWrapper">
+              <button type="button" class="confirm">Yes</button>
+              <button type="button" class="cancel">No</button>
+            </div>
+          </div>
+      `);
+        document.body.appendChild(div);
+        //put a very small titmeout before we add the open class
+        await setTimeOut(10);
+        div.classList.add('open');
+      });
+    }
+
+    if (e.target.closest('.cancel')) {
+      const divEl = document.querySelector('.deleteBtnContainer');
+      destroyPopup(divEl);
+    }
+
+    if (e.target.matches('button.cancelForm')) {
+      const form = document.querySelector('.popup');
+      destroyPopup(form);
+    };
+
+    if (e.target.matches('button.cancelAddForm')) {
+      const addForm = document.querySelector('.addPopup');
+      destroyPopup(addForm);
+    };
+
+  }
 
   // Store the songs in the local storage
   const setToLocalStorage = () => {

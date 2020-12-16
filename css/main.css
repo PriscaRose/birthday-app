@@ -17,11 +17,6 @@
   border-radius: 5px;
 }
 
-
-.confirmParagraph {
-  color: white;
-}
-
 .first-name,
 .last-name {
   font-size: 36px;
@@ -58,7 +53,4 @@
     margin-right: auto;
   }
 
-  span {
-    font-size: 16px;
-  }
 }

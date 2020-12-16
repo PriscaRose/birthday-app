@@ -3,7 +3,7 @@
 .deleteBtnContainer {
   width: 100%;
   height: 100%;
-  background-color: black;
+  background: rgba(255, 255, 255, 0.8);
   position: fixed;
   top: 0;
   bottom: 0;
@@ -11,51 +11,61 @@
   right: 0;
 }
 
+.confirmParagraph,
 .popup__heading,
 .addPopup__heading {
-  color: white;
-  font-size: 25px;
-  margin-bottom: 1.5rem;
+  font-size: 48px;
+  line-height: 57px;
+  color: #094067;
+  margin: 0;
   text-align: left;
-  padding-left: 16px;
+  grid-column: 2 / 5;
+}
+
+.confirmParagraph {
+  text-align: center;
 }
 
 .deleteBtnWrapper,
 .addPopup--container,
 .popup--container {
-  background-color: #f25f4c;
+  background: #FFFFFF;
+  border-radius: 5px;
   pointer-events: all;
-  opacity: 1;
-  text-align: center;
+  text-align: left;
   position: fixed;
-  top: 05%;
-  left: 10%;
-  right: 10%;
-  bottom: 0%;
+  top: 15%;
+  left: 05%;
+  right: 05%;
+  bottom: 05%;
   border-radius: 8px;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 1.5rem;
+  display: grid;
+	gap: 10px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
 }
 
 .deleteBtnWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
-.addPopup__button--wrapper {
-  margin-top: 1rem;
+.addPopup__button--wrapper,
+.popup__button--wrapper {
+  grid-row: 3 / 6;
+  grid-column: 2 / 5;
+  text-align: justify;
 }
 
 .addPopup--wrapper,
 .popup--wrapper {
-  display: grid;
-  grid-template-rows: repeat(4, 80px);
-}
-
-.popup--wrapper {
-  display: grid;
-  grid-template-rows: repeat(3, 80px);
+  grid-column: 2 / 3;
+  text-align: left;
 }
 
 .popup.open {
@@ -63,34 +73,36 @@
   opacity: 1;
 }
 
-.popup__input,
-.addPopup__input {
-  width: 80%;
-  border-radius: 5px;
+.popup__fieldset,
+.addPopup__fieldset {
+  margin-bottom: 16px;
 }
 
-@media (min-width: 800px) {
+.popup__input,
+.addPopup__input {
+  background: #D8EEFE;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 08px;
+  padding-bottom: 08px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
 
-  .deleteBtnWrapper,
-  .addPopup--container,
-  .popup--container {
-    background-color: #f25f4c;
-    pointer-events: all;
-    opacity: 1;
-    text-align: center;
-    position: fixed;
-    top: 05%;
-    left: 25%;
-    right: 25%;
-    bottom: 05%;
-    border-radius: 8px;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
+.addPopup__label,
+.popup__label {
+  font-size: 18px;
+  line-height: 21px;
+  color: #094067;
+}
+
+.btnWrapper {
+  margin-top: 30px;
+}
+
+@media (max-width: 500px) {
 
   .deleteBtnWrapper {
-    top: 25%;
-    bottom: 25%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -99,32 +111,14 @@
   .popup__heading,
   .addPopup__heading {
     font-size: 30px;
-    margin-bottom: 1.5rem;
+  }
+
+  .popup__label {
+    font-size: 14px;
   }
 
   .popup__button--wrapper{
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
   }
 
-  .addPopup__button--wrapper {
-    margin-top: 0.5rem;
-  }
-
-  .addPopup--wrapper,
-  .popup--wrapper {
-    display: grid;
-    grid-template-rows: repeat(4, 70px);
-    column-gap: 10px;
-  }
-
-  .popup--wrapper {
-    grid-template-rows: repeat(3, 70px);
-  }
-
-  .addPopup__fieldset,
-  .popup__fieldset {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-  }
 }

@@ -23,13 +23,6 @@
   background-image: url('../assets/trash.svg');
 }
 
-.reset-btn {
-  margin-top: 18px;
-  background-color: cadetblue;
-  color: white
-}
-
-
 .deleteBtnContainer.open {
   pointer-events: all;
   opacity: 1;
@@ -43,8 +36,6 @@
   margin-right: 32px;
 }
 
-.confirm,
-.cancel,
 .add-person {
   padding-top: 15px;
   padding-left: 18px;
@@ -55,40 +46,72 @@
   color: white;
 }
 
-/* .add-person:hover,
-.confirm:hover,
-.cancel:hover,
-.add-person:hover,
-.confirm:hover,
-.cancel:hover,
-.add-person:active,
-.confirm:active,
-.cancel:active,
-.cancelAddForm:active,
-.submit-btn:active {
-  color: #fffffe;
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+.submit-btn,
+.cancelForm,
+.confirm,
+.cancel,
+.cancelAddForm {
+  background: #FFFFFF;
+  border: 2px solid #5F6C7B;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding-top: 14px;
+  padding-bottom: 15px;
+  font-size: 18px;
+  line-height: 21px;
+  color: #5F6C7B;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.cancelForm {
+  padding-top: 08px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 08px;
+}
+
+.submit-btn {
+  padding-top: 08px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 08px;
+  margin-right: 25px;
 }
 
 .confirm,
-.cancel,
-.cancelAddForm,
-.submit-btn,
-.cancelForm {
+.cancel {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.cancelAddForm {
+  padding-top: 08px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 08px;
+}
+
+.submit-btn:hover,
+.cancelForm:hover,
+.cancel:hover,
+.confirm:hover,
+.cancelAddForm:hover {
+  background-color: #EF4565;
   color: white;
-  background-color: #272343;
-  box-shadow: 0 9px #999;
-  border-radius: 5px;
+  border-color: transparent;
 }
 
-.submit-btn {
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-right: 32px;
+@media (max-width: 700px) {
+
+  .submit-btn,
+  .cancelForm,
+  .confirm,
+  .cancel,
+  .cancelAddForm {
+    font-size: 14px;
+  }
 }
 
-.submit-btn {
-  margin-bottom: 1rem;
-} */
+
+
