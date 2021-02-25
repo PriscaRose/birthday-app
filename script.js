@@ -4,9 +4,9 @@ import {
 	differenceInCalendarYears,
 	differenceInCalendarDays,
 	compareAsc,
-  isPast, 
-  addYears, 
-  setYear, 
+  isPast,
+  addYears,
+  setYear,
   isToday,
 } from 'date-fns';
 
@@ -28,13 +28,14 @@ export async function fetchPerson() {
  }
 
   // Display person list
-  const displayPerson = (event, filterPerson, filterMonth) => {
+  const displayPerson = ( event,filterPerson, filterMonth) => {
     let sortedBirt = data.sort((a, b) => a.birthday - b.birthday);
     // Filtered the data here
     if (filterPerson) {
       sortedBirt = data.filter(person => {
         let lowerCaseTitle = person.lastName.toLowerCase() || person.firstName.toLowerCase();
         let lowerCaseFilter = filterPerson.toLowerCase();
+        console.log(lowerCaseFilter)
         if (lowerCaseTitle.includes(lowerCaseFilter)) {
           return true;
         } else {
@@ -59,7 +60,7 @@ export async function fetchPerson() {
 
     //Display the date
     const html = sortedBirt.map(person => {
-      const birthdate = getAge(new Date(person.birthday));
+      const ages = getAge(new Date(person.birthday));
       const birthday = new Date(person.birthday);
       let newDay = birthday.getDay() + 1;
       const month =  birthday.toLocaleString('en-us', { month: 'long' });
@@ -80,17 +81,12 @@ export async function fetchPerson() {
 
       if (isToday(nextBirthday)) {
         return `<li class="items" id="${person.id}">
-                  <h2>Happy birthady ${person.firstName} ${person.lastName}</h2>
                   <img class="image" src="${person.picture}" alt="">
-                  <div class="wrapper">
-                    <div class="name-wrapper">
-                      <span class="first-name">${person.firstName}</span>
-                      <span class="last-name">${person.lastName}</span>
-                    </div>
-                    <p class="birth_date">Turns <span class="age">${birthdate}</span> on ${month} ${newDay}</p>
+                  <div class="birthdaay-wrapper">
+                    <h2>Happy birthady <span class="birthday">${person.firstName} ${person.lastName}<span></h2>
+                    <p class="person-ages-desc">You turn <span class="birthday">${ages}</span> years old today</p>
                   </div>
                   <div>
-                    <span class="days">${numberOfDays} days</span>
                     <div class="btn--wrapper">
                       <button class="edit" value="${person.id}">edit</button>
                       <button class="delete" value="${person.id}">delete</button>
@@ -112,7 +108,7 @@ export async function fetchPerson() {
                       <span class="first-name">${person.firstName}</span>
                       <span class="last-name">${person.lastName}</span>
                     </div>
-                    <p class="birth_date">Turns <span class="age">${birthdate}</span> on ${month} ${newDay}</p>
+                    <p class="birth_date">Turns <span class="age">${ages}</span> on ${month} ${newDay}</p>
                   </div>
                   <div>
                     <span class="days">${numberOfDays} days</span>

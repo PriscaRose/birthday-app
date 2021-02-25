@@ -16,6 +16,21 @@
   padding-bottom: 23px;
   border-radius: 5px;
 }
+.birthdaay-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.birthday {
+  color: #EF4565;
+  font-size: inherit;
+  font-weight: bold;
+}
+
+.person-ages-desc {
+  font-size: 28px;
+  font-weight: bold;
+}
 
 .first-name,
 .last-name {
