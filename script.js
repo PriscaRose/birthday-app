@@ -35,7 +35,6 @@ export async function fetchPerson() {
       sortedBirt = data.filter(person => {
         let lowerCaseTitle = person.lastName.toLowerCase() || person.firstName.toLowerCase();
         let lowerCaseFilter = filterPerson.toLowerCase();
-        console.log(lowerCaseFilter)
         if (lowerCaseTitle.includes(lowerCaseFilter)) {
           return true;
         } else {
@@ -64,7 +63,6 @@ export async function fetchPerson() {
       const birthday = new Date(person.birthday);
       let newDay = birthday.getDay() + 1;
       const month =  birthday.toLocaleString('en-us', { month: 'long' });
-      const year = birthday.getFullYear();
       const today = new Date();
       let nextBirthday = setYear(birthday, today.getFullYear())
 
@@ -77,7 +75,6 @@ export async function fetchPerson() {
       else {
         newDay += "th";
       }
-      const numberOfDays = differenceInCalendarDays(nextBirthday, today)
 
       if (isToday(nextBirthday)) {
         return `<li class="items" id="${person.id}">
@@ -99,6 +96,7 @@ export async function fetchPerson() {
         nextBirthday = addYears(nextBirthday, 1);
       }
 
+      const numberOfDays = differenceInCalendarDays(nextBirthday, today)
       //Generate html
       return `
                 <li class="items" id="${person.id}">
