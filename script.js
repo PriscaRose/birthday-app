@@ -337,8 +337,10 @@ export async function fetchPerson() {
   filterSearchInput.addEventListener('keyup', filterList);
   filterMonthInput.addEventListener('change', filterList);
   restoreFromLocalStorage();
+  displayPerson()
 
-}; fetchPerson();
+};
+fetchPerson();
 
 
 
