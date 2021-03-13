@@ -16,9 +16,9 @@
   padding-bottom: 23px;
   border-radius: 5px;
 }
-.birthdaay-wrapper {
-  display: flex;
-  flex-direction: column;
+
+.name-wrapper {
+  padding-bottom: 16px;
 }
 
 .birthday {
@@ -34,15 +34,15 @@
 
 .first-name,
 .last-name {
-  font-size: 36px;
-  line-height: 43px;
+  font-size: 20px;
+  line-height: 25px;
   color: #000000;
 }
 
 .birth_date,
 .age {
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 20px;
+  line-height: 25px;
   color: #5F6C7B;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .days {
-  font-size: 24px;
+  font-size: 18px;
   line-height: 28px;
   color: #5F6C7B;
   margin-bottom: 41px;
@@ -61,11 +61,27 @@
   margin-top: 41px;
 }
 
+.image {
+  margin-right: 16px;
+}
+
 @media (min-width: 800px) {
   .container {
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .birth_date,
+  .age,
+  .first-name,
+  .last-name {
+    font-size: 36px;
+    line-height: 23px;
+  }
+
+  .days {
+    font-size: 24px;
   }
 
 }

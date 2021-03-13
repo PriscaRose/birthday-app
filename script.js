@@ -150,7 +150,10 @@ export async function fetchPerson() {
       popup.classList.add('popup');
       popup.insertAdjacentHTML('afterbegin', `
               <div class="popup--container">
-                <h2 class="popup__heading">Edit ${findId.lastName} ${findId.firstName}</h2>
+                <div class="heading--wrapper">
+                  <button class="cancelForm close-edit-popup">X</button>
+                  <h2 class="popup__heading">Edit ${findId.lastName} ${findId.firstName}</h2>
+                </div>
                 <div class="popup--wrapper">
                   <fieldset class="popup__fieldset">
                     <label class="popup__label" for="name">LastName</label>
