@@ -1,129 +1,54 @@
-import { list, addBtn, filterSearchInput, filterMonthInput, formEl } from './elements.js';
-import {
-	lightFormat,
-	differenceInCalendarYears,
-	differenceInCalendarDays,
-	compareAsc,
-  isPast,
-  addYears,
-  setYear,
-  isToday,
-} from 'date-fns';
+import { list, addBtn, filterSearchInput, filterMonthInput } from './elements.js';
+import { displayPerson} from './displayList';
 
 // Fetch data from people.json file
 export async function fetchPerson() {
   const response = await fetch('https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/b17e08696906abeaac8bc260f57738eaa3f6abb1/birthdayPeople.json');
-  let data = await response.json();
-
-  const filterList = e => {
-    displayPerson(e, filterSearchInput.value, filterMonthInput.value);
-  };
-
-  const getAge = (date1, date2) => {
-    // This is a condition like if statement
-    date2 = date2 || new Date();
-    //Calculation
-    const diff = date2.getTime() - date1.getTime();
-    return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
- }
+  let people = await response.json();
 
   // Display person list
-  const displayPerson = ( event,filterPerson, filterMonth) => {
-    let sortedBirt = data.sort((a, b) => a.birthday - b.birthday);
-    // Filtered the data here
-    if (filterPerson) {
-      sortedBirt = data.filter(person => {
-        let lowerCaseTitle = person.lastName.toLowerCase() || person.firstName.toLowerCase();
-        let lowerCaseFilter = filterPerson.toLowerCase();
-        if (lowerCaseTitle.includes(lowerCaseFilter)) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-    }
-    else if (filterMonth) {
-      sortedBirt = data.filter(person => {
-        let month = new Date(person.birthday);
-        let newMonth = month.toLocaleString('en-us', { month: 'long' });
-        let toLowerCAseNewMonth = newMonth.toLowerCase();
-        let lowerCaseFilterMonth = filterMonth.toLowerCase();
+  function displayList() {
+    const html = displayPerson(people)
+    list.innerHTML = html;
+  }
 
-        if (toLowerCAseNewMonth == lowerCaseFilterMonth) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-    }
+  displayList();
 
-    //Display the date
-    const html = sortedBirt.map(person => {
-      const ages = getAge(new Date(person.birthday));
-      const birthday = new Date(person.birthday);
-      let newDay = birthday.getDay() + 1;
-      const month =  birthday.toLocaleString('en-us', { month: 'long' });
-      const today = new Date();
-      let nextBirthday = setYear(birthday, today.getFullYear())
-
-      if (newDay == 1 || newDay == 21 || newDay == 31) {
-        newDay += "st";
-      }
-      else if (newDay == 2 || newDay == 22) {
-        newDay += "nd";
-      }
-      else {
-        newDay += "th";
-      }
-
-      if (isToday(nextBirthday)) {
-        return `<li class="items" id="${person.id}">
-                  <img class="image" src="${person.picture}" alt="">
-                  <div class="birthdaay-wrapper">
-                    <h2>Happy birthady <span class="birthday">${person.firstName} ${person.lastName}<span></h2>
-                    <p class="person-ages-desc">You turn <span class="birthday">${ages}</span> years old today</p>
-                  </div>
-                  <div>
-                    <div class="btn--wrapper">
-                      <button class="edit" value="${person.id}">edit</button>
-                      <button class="delete" value="${person.id}">delete</button>
-                    </div>
-                  </div>
-                  </li>`;
-      }
-      // if the date is already behind us, we add + 1 to the year
-      if (isPast(nextBirthday)) {
-        nextBirthday = addYears(nextBirthday, 1);
-      }
-
-      const numberOfDays = differenceInCalendarDays(nextBirthday, today)
-      //Generate html
-      return `
-                <li class="items" id="${person.id}">
-                  <img class="image" src="${person.picture}" alt="">
-                  <div class="wrapper">
-                    <div class="name-wrapper">
-                      <span class="first-name">${person.firstName}</span>
-                      <span class="last-name">${person.lastName}</span>
-                    </div>
-                    <p class="birth_date">Turns <span class="age">${ages}</span> on ${month} ${newDay}</p>
-                  </div>
-                  <div>
-                    <span class="days">${numberOfDays} days</span>
-                    <div class="btn--wrapper">
-                      <button class="edit" value="${person.id}">edit</button>
-                      <button class="delete" value="${person.id}">delete</button>
-                    </div>
-                  </div>
-                  </li>
-            `;
+  function filterByName(peopleToFilter) {
+    if(filterSearchInput.value !== "") {
+      return peopleToFilter.filter(person => {
+        const fullNameLowercase =
+            person.firstName.toLowerCase() + ' ' + person.lastName.toLowerCase();
+        return fullNameLowercase.includes(filterSearchInput.value.toLowerCase());
     });
+  }
+  return peopleToFilter;
+  }
 
-    //Append the html into the DOM
-    list.innerHTML = html.join('');
-  };
+  function filterByMonth(peopleToFilter) {
+    console.log(filterMonthInput.value)
+    if(filterMonthInput.value !== "month") {
+       return peopleToFilter.filter(person => {
+          let birthday = new Date(person.birthday);
+          const birthdayMonth = birthday.getMonth() + 1;
+          const selectedMonth = Number(filterMonthInput.value);
+          const condition = birthdayMonth === selectedMonth;
+          // debugger;
+          return condition;
+      });
+  }
+  return peopleToFilter;
+  }
 
-  // Set the time that you want to run another data
+  function filterBothNameAndMonth() {
+    console.log('I am called');
+    const getPeopleByName = filterByName(people);
+    const getPeopleByNameAndMonth = filterByMonth(getPeopleByName);
+    const filteredPeople = displayPerson(getPeopleByNameAndMonth);
+    list.innerHTML = filteredPeople;
+  }
+
+  // Set the time that you want to run another people
   const setTimeOut = (ms = 0) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
@@ -139,7 +64,7 @@ export async function fetchPerson() {
 
   // edit the popup
   function editPopup(id) {
-    const findId = data.find(person => person.id == id);
+    const findId = people.find(person => person.id == id);
     let peopleBirthday = new Date(findId.birthday);
     let days = peopleBirthday.getDay();
     const month = peopleBirthday.getMonth();
@@ -214,13 +139,14 @@ export async function fetchPerson() {
   }
 
   const deleteBtn = (id) => {
-    data = data.filter(person => person.id != id);
+    people = people.filter(person => person.id != id);
     list.dispatchEvent(new CustomEvent('listUpdated'));
   };
 
   // Add a person in the list
   const addPerson = (e) => {
     e.preventDefault();
+
     const form = document.createElement('form');
     form.classList.add('addPopup');
     form.insertAdjacentHTML('afterbegin', `
@@ -252,6 +178,10 @@ export async function fetchPerson() {
             `);
 
     document.body.appendChild(form);
+    const dateInput = document.querySelector('input[type=date]');
+    //Converts from Timestamp
+    const date = new Date().toISOString().slice(0, 10)
+    dateInput.max = date
 
     const displayNewPer = e => {
       e.preventDefault();
@@ -263,7 +193,7 @@ export async function fetchPerson() {
         picture: formEl.picture.value,
         id: Date.now(),
       };
-      data.push(newPerson);
+      people.push(newPerson);
       list.dispatchEvent(new CustomEvent('listUpdated'));
       formEl.reset();
       destroyPopup(formEl);
@@ -276,7 +206,7 @@ export async function fetchPerson() {
   const handleClick = (e) => {
     const buttons = e.target;
     const deleteBtn = e.target.closest('button.delete');
-    const findIdToDelete = data.find(person => person.id == buttons.value);
+    const findIdToDelete = people.find(person => person.id == buttons.value);
 
     if (deleteBtn) {
       return new Promise(async function (resolve) {
@@ -317,15 +247,15 @@ export async function fetchPerson() {
 
   // Store the songs in the local storage
   const setToLocalStorage = () => {
-    const objectStringyfy = JSON.stringify(data);
-    localStorage.setItem('data', objectStringyfy);
+    const objectStringyfy = JSON.stringify(people);
+    localStorage.setItem('people', objectStringyfy);
   };
 
   const restoreFromLocalStorage = () => {
     const personLs = JSON.parse(localStorage.getItem('data'));
     console.log(personLs);
     if (personLs) {
-      data = personLs;
+    people = personLs;
       list.dispatchEvent(new CustomEvent('listUpdated'));
     };
   }
@@ -335,12 +265,12 @@ export async function fetchPerson() {
   window.addEventListener('click', handleClick);
   addBtn.addEventListener('click', addPerson);
   list.addEventListener('click', editPopupPartener);
-  list.addEventListener('listUpdated', displayPerson);
+  list.addEventListener('listUpdated', displayList);
   list.addEventListener('listUpdated', setToLocalStorage);
-  filterSearchInput.addEventListener('keyup', filterList);
-  filterMonthInput.addEventListener('change', filterList);
+  filterSearchInput.addEventListener('keyup',()=> filterBothNameAndMonth());
+  filterMonthInput.addEventListener('change', () => filterBothNameAndMonth());
   restoreFromLocalStorage();
-  displayPerson()
+  displayList(people)
 
 };
 fetchPerson();
