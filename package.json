@@ -1,6 +1,6 @@
 {
   "name": "birthday-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hey team! So the final project here will be a birthday list.",
   "main": "-rubish.js",
   "dependencies": {
