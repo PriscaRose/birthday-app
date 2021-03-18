@@ -250,8 +250,7 @@ export async function fetchPerson() {
   };
 
   const restoreFromLocalStorage = () => {
-    const personLs = JSON.parse(localStorage.getItem('data'));
-    console.log(personLs);
+    const personLs = JSON.parse(localStorage.getItem('people'));
     if (personLs) {
     people = personLs;
       list.dispatchEvent(new CustomEvent('listUpdated'));
