@@ -14,18 +14,44 @@ const getAge = (date1, date2) => {
   return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
 }
 
+function calculateDaysToBirhtday(personToCalculate) {
+  const birthday = new Date(personToCalculate.birthday);
+  const today = new Date();
+  let nextBirthday = setYear(birthday, today.getFullYear())
+
+  // if the date is already behind us, we add + 1 to the year
+  if (isPast(nextBirthday)) {
+    nextBirthday = addYears(nextBirthday, 1);
+  }
+  if (isToday(nextBirthday)) {
+    return `<li class="items" id="${person.id}">
+              <img class="image" src="${person.picture}" alt="">
+              <div class="birthdaay-wrapper">
+                <h2>Happy birthady <span class="birthday">${person.firstName}  ${person.lastName}<span></h2>
+                <p class="person-ages-desc">You turn <span class="birthday">${ages}</span> years old today</p>
+              </div>
+              <div>
+                <div class="btn--wrapper">
+                  <button class="edit" value="${person.id}">edit</button>
+                  <button class="delete" value="${person.id}">delete</button>
+                </div>
+              </div>
+              </li>`;
+  }
+
+  const numberOfDays = differenceInCalendarDays(nextBirthday, today)
+  return numberOfDays;
+}
+
 export const displayPerson = (people) => {
   //Display the date
-  return people.map(person => {
+  const sortedPeople = people.sort(function(person1, person2) {
+  return calculateDaysToBirhtday(person1) - calculateDaysToBirhtday(person2)});
+  return sortedPeople.map(person => {
     const ages = getAge(new Date(person.birthday));
     const birthday = new Date(person.birthday);
     let newDay = birthday.getDay() + 1;
     const month =  birthday.toLocaleString('en-us', { month: 'long' });
-    const today = new Date();
-    let nextBirthday = setYear(birthday, today.getFullYear())
-    // let dayToBirthdayA = differenceInCalendarDays(getNextBirthday(a.birthday), new Date());
-    // let dayToBirthdayB = differenceInCalendarDays(getNextBirthday(b.birthday), new Date());
-    // return compareAsc(dayToBirthdayA, dayToBirthdayB);
 
     if (newDay == 1 || newDay == 21 || newDay == 31) {
       newDay += "st";
@@ -37,27 +63,8 @@ export const displayPerson = (people) => {
       newDay += "th";
     }
 
-    if (isToday(nextBirthday)) {
-      return `<li class="items" id="${person.id}">
-                <img class="image" src="${person.picture}" alt="">
-                <div class="birthdaay-wrapper">
-                  <h2>Happy birthady <span class="birthday">${person.firstName}  ${person.lastName}<span></h2>
-                  <p class="person-ages-desc">You turn <span class="birthday">${ages}</span> years old today</p>
-                </div>
-                <div>
-                  <div class="btn--wrapper">
-                    <button class="edit" value="${person.id}">edit</button>
-                    <button class="delete" value="${person.id}">delete</button>
-                  </div>
-                </div>
-                </li>`;
-    }
-    // if the date is already behind us, we add + 1 to the year
-    if (isPast(nextBirthday)) {
-      nextBirthday = addYears(nextBirthday, 1);
-    }
+    const numberOfDays = calculateDaysToBirhtday(person);
 
-    const numberOfDays = differenceInCalendarDays(nextBirthday, today)
     //Generate html
     return `
               <li class="items" id="${person.id}">

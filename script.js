@@ -65,11 +65,9 @@ export async function fetchPerson() {
   // edit the popup
   function editPopup(id) {
     const findId = people.find(person => person.id == id);
-    let peopleBirthday = new Date(findId.birthday);
-    let days = peopleBirthday.getDay();
-    const month = peopleBirthday.getMonth();
-    const year = peopleBirthday.getFullYear();
-    const birthday = `${days}/${month}/${year}`;
+    const birthday = new Date(findId.birthday).toISOString().slice(0, 10);
+    const today = new Date().toISOString().slice(0, 10);
+
     return new Promise(async function () {
       const popup = document.createElement('form');
       popup.classList.add('popup');
@@ -90,7 +88,7 @@ export async function fetchPerson() {
                   </fieldset>
                   <feldset class="popup__fieldset">
                     <label class="popup__label" for="birthday">Birthday</label>
-                    <input type="text" class="popup__input" name="birthday" id="birthday" value="${birthday}" />
+                    <input type="date" class="popup__input" name="birthday" id="birthday" max="${today}" value="${birthday}" />
                   </feldset>
                 </div>
                 <div class="popup__button--wrapper">
