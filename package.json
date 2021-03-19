@@ -5,6 +5,7 @@
   "main": "-rubish.js",
   "dependencies": {
     "date-fns": "^2.16.1",
+    "live-server": "^1.2.1",
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {},
@@ -18,8 +19,8 @@
   "author": "",
   "license": "ISC",
   "browserslist": [
-		"last 1 chrome versions"
-	],
+    "last 1 chrome versions"
+  ],
   "bugs": {
     "url": "https://github.com/ravinalamada/birthday-app/issues"
   },

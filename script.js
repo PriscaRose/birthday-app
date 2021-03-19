@@ -1,5 +1,6 @@
 import { list, addBtn, filterSearchInput, filterMonthInput } from './elements.js';
 import { displayPerson} from './displayList';
+// import peopleData from './people.json'
 
 // Fetch data from people.json file
 export async function fetchPerson() {
@@ -249,7 +250,6 @@ export async function fetchPerson() {
     localStorage.setItem('people', objectStringyfy);
   };
 
-  console.log(setToLocalStorage());
   const restoreFromLocalStorage = () => {
     const personLs = JSON.parse(localStorage.getItem('people'));
     if (personLs) {

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles.b61e60ae.css">
+		<title>Birthday list</title>
+	<script src="/styles.b61e60ae.js"></script></head>
+	<body>
+    <article>
+      <div class="container">
+        <header class="header">
+            <h1 class="header__heading"> Birthday reminder </h1>
+          </header>
+          <form class="form">
+            <fieldset class="form__fieldset">
+              <label for="searchInput" class="form__label">Filtered by name</label>
+              <input type="text" class="form__input" id="searchInput" placeholder="Type a name here">
+            </fieldset>
+            <fieldset class="form__fieldset">
+              <label for="filtered-month" class="form__label">Filtered by months</label>
+              <select name="month" id="filtered-month" class="form__select">
+                <option value="month">Select a month</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </fieldset>
+            <button type="submit" class="add-person">Add somebody</button>
+          </form>
+          <ul class="list"></ul>
+        </div>
+    </article>
+		<script type="module" src="/script.75da7f30.js"></script>
+	</body>
+</html>
