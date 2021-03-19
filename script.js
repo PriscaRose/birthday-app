@@ -249,6 +249,7 @@ export async function fetchPerson() {
     localStorage.setItem('people', objectStringyfy);
   };
 
+  console.log(setToLocalStorage());
   const restoreFromLocalStorage = () => {
     const personLs = JSON.parse(localStorage.getItem('people'));
     if (personLs) {
