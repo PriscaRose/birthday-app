@@ -187,12 +187,12 @@
   }
 }
 
-@media (min-width: 1230px) {
+@media (min-width: 1300px) {
 
   .deleteBtnWrapper,
   .addPopup--container,
   .popup--container {
-    left: 15%;
-    right: 15%;
+    left: 25%;
+    right: 25%;
   }
 }
