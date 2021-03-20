@@ -1,6 +1,5 @@
 import { list, addBtn, filterSearchInput, filterMonthInput } from './elements.js';
 import { displayPerson} from './displayList';
-// import peopleData from './people.json'
 
 // Fetch data from people.json file
 export async function fetchPerson() {
@@ -27,14 +26,12 @@ export async function fetchPerson() {
   }
 
   function filterByMonth(peopleToFilter) {
-    console.log(filterMonthInput.value)
     if(filterMonthInput.value !== "month") {
        return peopleToFilter.filter(person => {
           let birthday = new Date(person.birthday);
           const birthdayMonth = birthday.getMonth() + 1;
           const selectedMonth = Number(filterMonthInput.value);
           const condition = birthdayMonth === selectedMonth;
-          // debugger;
           return condition;
       });
   }
@@ -42,7 +39,6 @@ export async function fetchPerson() {
   }
 
   function filterBothNameAndMonth() {
-    console.log('I am called');
     const getPeopleByName = filterByName(people);
     const getPeopleByNameAndMonth = filterByMonth(getPeopleByName);
     const filteredPeople = displayPerson(getPeopleByNameAndMonth);
@@ -74,8 +70,8 @@ export async function fetchPerson() {
       popup.classList.add('popup');
       popup.insertAdjacentHTML('afterbegin', `
               <div class="popup--container">
-                <div class="heading--wrapper">
-                  <button class="cancelForm close-edit-popup">X</button>
+                <div class="header--wrapper">
+                  <button class="cancelForm close--editPopup">X</button>
                   <h2 class="popup__heading">Edit ${findId.lastName} ${findId.firstName}</h2>
                 </div>
                 <div class="popup--wrapper">
@@ -150,7 +146,10 @@ export async function fetchPerson() {
     form.classList.add('addPopup');
     form.insertAdjacentHTML('afterbegin', `
             <div class="addPopup--container">
-              <h2 class="addPopup__heading"> Add a new person's birthday here</h2>
+              <div class="header--wrapper">
+                <button class="cancelAddForm close--addPopup">X</button>
+                <h2 class="addPopup__heading"> Add a new person's birthday here</h2>
+              </div>
               <div class="addPopup--wrapper">
                 <fieldset class="addPopup__fieldset">
                   <label class="popup__label" for="picture">Add a picture</label>

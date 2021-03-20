@@ -68,13 +68,12 @@ export const displayPerson = (people) => {
     //Generate html
     return `
               <li class="items" id="${person.id}">
-                <img class="image" src="${person.picture}" alt="">
                 <div class="wrapper">
+                  <img class="image" src="${person.picture}" alt="image">
                   <div class="name-wrapper">
-                    <span class="first-name">${person.firstName}</span>
-                    <span class="last-name">${person.lastName}</span>
-                  </div>
-                  <p class="birth_date">Turns <span class="age">${ages}</span> on ${month} ${newDay}</p>
+                      <span class="person-name">${person.firstName} ${person.lastName}</span>
+                    <p class="birth_date">Turns <span class="age">${ages}</span> on ${month} ${newDay}</p>
+                    </div>
                 </div>
                 <div>
                   <span class="days">${numberOfDays} days</span>

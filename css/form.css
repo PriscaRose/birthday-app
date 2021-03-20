@@ -13,12 +13,24 @@
 
 .form__label {
   color: #094067;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
 }
 
 .form__input,
 .form__select {
   width: 100%;
   border-radius: 5px;
+  margin-top: 13px;
+}
+
+ input::placeholder,
+ select {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #5F6C7B;
 }
 
 .form__input {

@@ -24,6 +24,8 @@ li {
 fieldset,
 input,
 select {
+  margin: 0;
+  padding: 0;
   border-color: transparent;
 }
 
@@ -40,6 +42,7 @@ img {
 
 button {
   border-color: transparent;
+  cursor: pointer;
 }
 
 span {

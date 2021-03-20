@@ -1,9 +1,6 @@
-.btn--wrapper,
-.items {
-  display: flex;
-  list-style: none;
-  justify-content: space-between;
-  align-items: center;
+.container {
+  padding-inline-start: 16px;
+  padding-inline-end: 16px;
 }
 
 .items {
@@ -17,8 +14,25 @@
   border-radius: 5px;
 }
 
+.wrapper {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.btn--wrapper,
+.items {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .name-wrapper {
-  padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-block-start: 33px;
 }
 
 .birthday {
@@ -32,8 +46,7 @@
   font-weight: bold;
 }
 
-.first-name,
-.last-name {
+.person-name {
   font-size: 20px;
   line-height: 25px;
   color: #000000;
@@ -44,6 +57,7 @@
   font-size: 20px;
   line-height: 25px;
   color: #5F6C7B;
+  margin-top: 0;
 }
 
 .age {
@@ -65,17 +79,18 @@
   margin-right: 16px;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 900px) {
   .container {
-    max-width: 900px;
+    max-width: 80%;
     margin-left: auto;
     margin-right: auto;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
   }
 
   .birth_date,
   .age,
-  .first-name,
-  .last-name {
+  .person-name{
     font-size: 36px;
     line-height: 23px;
   }
@@ -85,3 +100,10 @@
   }
 
 }
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 50%;
+  }
+}
+
