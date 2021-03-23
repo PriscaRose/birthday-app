@@ -65,6 +65,8 @@
   border-radius: 5px;
   padding-top: 14px;
   padding-bottom: 15px;
+  padding-left: 21px;
+  padding-right: 16px;
   font-size: 18px;
   line-height: 21px;
   color: #5F6C7B;
@@ -72,33 +74,31 @@
   line-height: 21px;
 }
 
-.cancelForm {
-  padding-top: 08px;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-bottom: 08px;
+.cancelForm,
+.cancel,
+.confirm,
+.cancelAddForm,
+.submit-btn {
+  flex-basis: 50%;
 }
 
-.submit-btn {
-  padding-top: 08px;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-bottom: 08px;
-  margin-right: 25px;
+/* .submit-btn {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .confirm,
 .cancel {
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
-.cancelAddForm {
+/* .cancelAddForm {
   padding-top: 08px;
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 08px;
-}
+} */ */
 
 .cancelForm:hover,
 .cancel:hover,
@@ -122,6 +122,12 @@
   text-align: right;
   width: 100%;
   outline: none;
+  font-size: 29px;
+  line-height: 29px;
+  color: #094067;
+  padding-right: 63.5px;
+  padding-top: 53.5px;
+  padding-bottom: 38.5px;
 }
 
 .close--addPopup:hover,

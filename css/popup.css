@@ -15,7 +15,6 @@
 .addPopup__heading {
   margin: 0;
   text-align: left;
-  margin-top: 121px;
   margin-bottom: 26px;
 }
 
@@ -29,9 +28,9 @@
 }
 
 .popup__heading {
-  padding-top: 80px;
   font-size: 48px;
   line-height: 57px;
+  margin-block-start: 0;
 }
 
 .addPopup__heading {
@@ -55,12 +54,11 @@
   pointer-events: all;
   text-align: left;
   position: fixed;
-  top: 20%;
+  top: 161px;
   left: 02%;
-  right: 02%;
-  bottom: 05%;
+  right: 1.5%;
+  bottom: 02%;
   border-radius: 8px;
-  padding-top: 1.5rem;
   display: grid;
 	gap: 10px;
 	grid-template-columns: repeat(3, 1fr);
@@ -79,9 +77,11 @@
 .addPopup__button--wrapper,
 .popup__button--wrapper {
   grid-row: 3 / 6;
-  grid-column: 2 / 5;
+  grid-column: 2 / 3;
   text-align: justify;
-  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .addPopup--wrapper,
@@ -108,11 +108,12 @@
 .addPopup__input {
   background: #D8EEFE;
   border-radius: 5px;
-  width: 100%;
-  padding-top: 08px;
-  padding-bottom: 08px;
+  width: 80%;
+  padding-top: 15px;
+  padding-bottom: 14px;
   padding-left: 16px;
   padding-right: 16px;
+  margin-top: 8px;
 }
 
 .addPopup__label,
@@ -131,9 +132,9 @@
   .deleteBtnWrapper,
   .addPopup--container,
   .popup--container {
-    top: 13%;
     padding-left: 16px;
     padding-right: 16px;
+    bottom: 02%;
   }
 
   .popup__heading {
@@ -163,36 +164,20 @@
 
 @media(min-width: 900px) {
 
-  .deleteBtnWrapper,
-  .addPopup--container,
-  .popup--container {
-    left: 10%;
-    right: 10%;
-  }
-
   .confirmParagraph,
   .addPopup__heading {
     font-size: 48px;
-    font-size: 48px;
     line-height: 57px;
   }
 
-  .popup__heading {
-    font-size: 48px;
-    line-height: 57px;
-  }
-
-  .addPopup__heading {
-    margin-top: 65px;
-  }
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 1440px) {
 
   .deleteBtnWrapper,
   .addPopup--container,
   .popup--container {
-    left: 25%;
-    right: 25%;
+    left: 09%;
+    right: 09%;
   }
 }
