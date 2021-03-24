@@ -1,4 +1,4 @@
-import { list, addBtn, filterSearchInput, filterMonthInput } from './elements.js';
+import { body, list, addBtn, filterSearchInput, filterMonthInput } from './elements.js';
 import { displayPerson} from './displayList';
 
 // Fetch data from people.json file
@@ -107,6 +107,7 @@ export async function fetchPerson() {
       });
       // insert tht popup in the DOM
       document.body.appendChild(popup);
+      body.style.overflow = 'hidden';
       //put a very small titmeout before we add the open class
       await setTimeOut(10);
       popup.classList.add('open');
@@ -176,6 +177,7 @@ export async function fetchPerson() {
             `);
 
     document.body.appendChild(form);
+    document.body.style.overflow = 'hidden';
     const dateInput = document.querySelector('input[type=date]');
     //Converts from Timestamp
     const date = new Date().toISOString().slice(0, 10)
@@ -195,6 +197,7 @@ export async function fetchPerson() {
       list.dispatchEvent(new CustomEvent('listUpdated'));
       formEl.reset();
       destroyPopup(formEl);
+      body.style.overflow = 'visible';
     };
 
     form.addEventListener('submit', displayNewPer);
@@ -205,8 +208,6 @@ export async function fetchPerson() {
     const buttons = e.target;
     const deleteBtn = e.target.closest('button.delete');
     const findIdToDelete = people.find(person => person.id == buttons.value);
-    const body = document.querySelector('body');
-    body.style.overflow = 'hidden';
     if (deleteBtn) {
       return new Promise(async function (resolve) {
         const div = document.createElement('div');
@@ -231,16 +232,19 @@ export async function fetchPerson() {
     if (e.target.closest('.cancel')) {
       const divEl = document.querySelector('.deleteBtnContainer');
       destroyPopup(divEl);
+      body.style.overflow = 'visible';
     }
 
     if (e.target.matches('button.cancelForm')) {
       const form = document.querySelector('.popup');
       destroyPopup(form);
+      body.style.overflow = 'visible';
     };
 
     if (e.target.matches('button.cancelAddForm')) {
       const addForm = document.querySelector('.addPopup');
       destroyPopup(addForm);
+      body.style.overflow = 'visible';
     };
 
   }

@@ -123,7 +123,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.formEl = exports.filterMonthInput = exports.filterSearchInput = exports.addBtn = exports.list = void 0;
+exports.body = exports.formEl = exports.filterMonthInput = exports.filterSearchInput = exports.addBtn = exports.list = void 0;
 // Grab element that are needed
 const list = document.querySelector('.list');
 exports.list = list;
@@ -135,6 +135,8 @@ const filterMonthInput = document.querySelector('#filtered-month');
 exports.filterMonthInput = filterMonthInput;
 const formEl = document.querySelector('.form');
 exports.formEl = formEl;
+const body = document.querySelector('body');
+exports.body = body;
 },{}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -18512,7 +18514,8 @@ async function fetchPerson() {
         _elements.list.dispatchEvent(new CustomEvent('listUpdated'));
       }); // insert tht popup in the DOM
 
-      document.body.appendChild(popup); //put a very small titmeout before we add the open class
+      document.body.appendChild(popup);
+      _elements.body.style.overflow = 'hidden'; //put a very small titmeout before we add the open class
 
       await setTimeOut(10);
       popup.classList.add('open');
@@ -18583,6 +18586,7 @@ async function fetchPerson() {
             </div>
             `);
     document.body.appendChild(form);
+    document.body.style.overflow = 'hidden';
     const dateInput = document.querySelector('input[type=date]'); //Converts from Timestamp
 
     const date = new Date().toISOString().slice(0, 10);
@@ -18604,6 +18608,7 @@ async function fetchPerson() {
 
       formEl.reset();
       destroyPopup(formEl);
+      _elements.body.style.overflow = 'visible';
     };
 
     form.addEventListener('submit', displayNewPer);
@@ -18614,8 +18619,6 @@ async function fetchPerson() {
     const buttons = e.target;
     const deleteBtn = e.target.closest('button.delete');
     const findIdToDelete = people.find(person => person.id == buttons.value);
-    const body = document.querySelector('body');
-    body.style.overflow = 'hidden';
 
     if (deleteBtn) {
       return new Promise(async function (resolve) {
@@ -18634,18 +18637,20 @@ async function fetchPerson() {
 
         await setTimeOut(10);
         div.classList.add('open');
-        body.style.overflow = 'hidden';
+        _elements.body.style.overflow = 'hidden';
       });
     }
 
     if (e.target.closest('.cancel')) {
       const divEl = document.querySelector('.deleteBtnContainer');
       destroyPopup(divEl);
+      _elements.body.style.overflow = 'visible';
     }
 
     if (e.target.matches('button.cancelForm')) {
       const form = document.querySelector('.popup');
       destroyPopup(form);
+      _elements.body.style.overflow = 'visible';
     }
 
     ;
@@ -18653,6 +18658,7 @@ async function fetchPerson() {
     if (e.target.matches('button.cancelAddForm')) {
       const addForm = document.querySelector('.addPopup');
       destroyPopup(addForm);
+      _elements.body.style.overflow = 'visible';
     }
 
     ;
@@ -18726,7 +18732,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59413" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60844" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
