@@ -205,7 +205,8 @@ export async function fetchPerson() {
     const buttons = e.target;
     const deleteBtn = e.target.closest('button.delete');
     const findIdToDelete = people.find(person => person.id == buttons.value);
-
+    const body = document.querySelector('body');
+    body.style.overflow = 'hidden';
     if (deleteBtn) {
       return new Promise(async function (resolve) {
         const div = document.createElement('div');
@@ -223,6 +224,7 @@ export async function fetchPerson() {
         //put a very small titmeout before we add the open class
         await setTimeOut(10);
         div.classList.add('open');
+        body.style.overflow = 'hidden';
       });
     }
 

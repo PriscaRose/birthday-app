@@ -18614,6 +18614,8 @@ async function fetchPerson() {
     const buttons = e.target;
     const deleteBtn = e.target.closest('button.delete');
     const findIdToDelete = people.find(person => person.id == buttons.value);
+    const body = document.querySelector('body');
+    body.style.overflow = 'hidden';
 
     if (deleteBtn) {
       return new Promise(async function (resolve) {
@@ -18632,6 +18634,7 @@ async function fetchPerson() {
 
         await setTimeOut(10);
         div.classList.add('open');
+        body.style.overflow = 'hidden';
       });
     }
 
@@ -18723,7 +18726,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64671" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59413" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
