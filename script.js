@@ -61,8 +61,8 @@ export async function fetchPerson() {
 
   // edit the popup
   function editPopup(id) {
-    const findId = people.find(person => person.id == id);
-    const birthday = new Date(findId.birthday).toISOString().slice(0, 10);
+    const personToEdit = people.find(person => person.id == id);
+    const birthday = new Date(personToEdit.birthday).toISOString().slice(0, 10);
     const today = new Date().toISOString().slice(0, 10);
 
     return new Promise(async function () {
@@ -72,16 +72,16 @@ export async function fetchPerson() {
               <div class="popup--container">
                 <div class="header--wrapper">
                   <button class="cancelForm close--editPopup">X</button>
-                  <h2 class="popup__heading">Edit ${findId.lastName} ${findId.firstName}</h2>
+                  <h2 class="popup__heading">Edit ${personToEdit.lastName} ${personToEdit.firstName}</h2>
                 </div>
                 <div class="popup--wrapper">
                   <fieldset class="popup__fieldset">
                     <label class="popup__label" for="name">LastName</label>
-                    <input type="text" class="popup__input" name="lastName" id="name" value="${findId.lastName}"/>
+                    <input type="text" class="popup__input" name="lastName" id="name" value="${personToEdit.lastName}"/>
                   </fieldset>
                   <fieldset class="popup__fieldset">
                     <label class="popup__label" for="firstName">Firstname</label>
-                    <input type="text" class="popup__input" name="firstName" id="firstName" value="${findId.firstName}"/>
+                    <input type="text" class="popup__input" name="firstName" id="firstName" value="${personToEdit.firstName}"/>
                   </fieldset>
                   <feldset class="popup__fieldset">
                     <label class="popup__label" for="birthday">Birthday</label>
@@ -98,10 +98,18 @@ export async function fetchPerson() {
       // Submit form that have been edited
       popup.addEventListener('submit', (e) => {
         e.preventDefault();
-        findId.lastName = popup.lastName.value;
-        findId.firstName = popup.firstName.value;
-        findId.birthday = popup.birthday.value;
-        displayPerson(findId);
+        personToEdit.lastName = popup.lastName.value;
+        personToEdit.firstName = popup.firstName.value;
+        personToEdit.birthday = popup.birthday.value;
+
+        const upadatedPeople = people.map(person => {
+          if(personToEdit.id === person.id) {
+            return personToEdit;
+          }
+          return person
+        })
+
+        displayPerson(upadatedPeople);
         destroyPopup(popup);
         list.dispatchEvent(new CustomEvent('listUpdated'));
       });

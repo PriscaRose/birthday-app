@@ -44,6 +44,7 @@ function calculateDaysToBirhtday(personToCalculate) {
 }
 
 export const displayPerson = (people) => {
+  console.log('Iam   peole', people)
   //Display the date
   const sortedPeople = people.sort(function(person1, person2) {
   return calculateDaysToBirhtday(person1) - calculateDaysToBirhtday(person2)});

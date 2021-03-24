@@ -18354,7 +18354,8 @@ function calculateDaysToBirhtday(personToCalculate) {
 }
 
 const displayPerson = people => {
-  //Display the date
+  console.log('Iam   peole', people); //Display the date
+
   const sortedPeople = people.sort(function (person1, person2) {
     return calculateDaysToBirhtday(person1) - calculateDaysToBirhtday(person2);
   });
@@ -18470,8 +18471,8 @@ async function fetchPerson() {
 
 
   function editPopup(id) {
-    const findId = people.find(person => person.id == id);
-    const birthday = new Date(findId.birthday).toISOString().slice(0, 10);
+    const personToEdit = people.find(person => person.id == id);
+    const birthday = new Date(personToEdit.birthday).toISOString().slice(0, 10);
     const today = new Date().toISOString().slice(0, 10);
     return new Promise(async function () {
       const popup = document.createElement('form');
@@ -18480,16 +18481,16 @@ async function fetchPerson() {
               <div class="popup--container">
                 <div class="header--wrapper">
                   <button class="cancelForm close--editPopup">X</button>
-                  <h2 class="popup__heading">Edit ${findId.lastName} ${findId.firstName}</h2>
+                  <h2 class="popup__heading">Edit ${personToEdit.lastName} ${personToEdit.firstName}</h2>
                 </div>
                 <div class="popup--wrapper">
                   <fieldset class="popup__fieldset">
                     <label class="popup__label" for="name">LastName</label>
-                    <input type="text" class="popup__input" name="lastName" id="name" value="${findId.lastName}"/>
+                    <input type="text" class="popup__input" name="lastName" id="name" value="${personToEdit.lastName}"/>
                   </fieldset>
                   <fieldset class="popup__fieldset">
                     <label class="popup__label" for="firstName">Firstname</label>
-                    <input type="text" class="popup__input" name="firstName" id="firstName" value="${findId.firstName}"/>
+                    <input type="text" class="popup__input" name="firstName" id="firstName" value="${personToEdit.firstName}"/>
                   </fieldset>
                   <feldset class="popup__fieldset">
                     <label class="popup__label" for="birthday">Birthday</label>
@@ -18505,10 +18506,17 @@ async function fetchPerson() {
 
       popup.addEventListener('submit', e => {
         e.preventDefault();
-        findId.lastName = popup.lastName.value;
-        findId.firstName = popup.firstName.value;
-        findId.birthday = popup.birthday.value;
-        (0, _displayList.displayPerson)(findId);
+        personToEdit.lastName = popup.lastName.value;
+        personToEdit.firstName = popup.firstName.value;
+        personToEdit.birthday = popup.birthday.value;
+        const upadatedPeople = people.map(person => {
+          if (personToEdit.id === person.id) {
+            return personToEdit;
+          }
+
+          return person;
+        });
+        (0, _displayList.displayPerson)(upadatedPeople);
         destroyPopup(popup);
 
         _elements.list.dispatchEvent(new CustomEvent('listUpdated'));
@@ -18732,7 +18740,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60844" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61525" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
