@@ -4,10 +4,12 @@
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: flex-end;
-  margin-block-end: 3rem;
+  margin-block-end: 47px;
 }
 
 .form__fieldset {
+  display: flex;
+  flex-direction: column;
   border-color: transparent;
 }
 
@@ -33,21 +35,47 @@
   color: #5F6C7B;
 }
 
+.form__select,
 .form__input {
   padding-top: 15px;
   padding-left: 18px;
-  padding-right: 11px;
+  padding-right: 129px;
   padding-bottom: 14px;
 }
 
-.form__select {
-  padding-top: 18px;
-  padding-left: 18px;
-  padding-right: 11px;
-  padding-bottom: 16px;
+.form__input {
+  padding-top: 19px;
 }
 
 .form__fieldset,
 .add-person {
   margin-top: 1rem;
+}
+
+@media(max-width: 300px) {
+
+  .form__input,
+  .form__select {
+    padding-right: 20px;
+  }
+}
+
+@media(min-width: 1000px) {
+
+  .form {
+    display: grid;
+    grid-template-columns: 36% 35% 20%;
+    align-items: flex-end;
+    gap: 34px;
+  }
+
+  .add-person,
+  .form__fieldset {
+    margin-top: 0;
+  }
+
+  .form__input,
+  .form__select {
+    padding-right: 11px;
+  }
 }

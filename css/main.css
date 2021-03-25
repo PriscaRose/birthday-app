@@ -79,9 +79,9 @@
   margin-right: 16px;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1000px) {
   .container {
-    max-width: 1079px;
+    max-width: 779px;
     margin-left: auto;
     margin-right: auto;
     padding-inline-start: 0;

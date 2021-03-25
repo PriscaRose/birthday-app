@@ -18575,15 +18575,15 @@ async function fetchPerson() {
                   <input type="url"  class="addPopup__input"class="picture" id="picture" name="picture" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">
-                  <label class="popup__label" for="name">Your last name</label>
+                  <label class="popup__label" for="name">Last name</label>
                   <input type="text" class="addPopup__input" id="name" name="lastName" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">
-                  <label class="popup__label" for="firstName">Your first name</label>
+                  <label class="popup__label" for="firstName">First name</label>
                   <input type="text" class="addPopup__input" id="firstName" name="firstName" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">
-                  <label class="popup__label" for="birthday">Your birthday</label>
+                  <label class="popup__label" for="birthday">Birthday</label>
                   <input type="date" class="addPopup__input" id="birthday" name="birthday" value="" required/>
                 </fieldset>
               </div>
@@ -18634,7 +18634,10 @@ async function fetchPerson() {
         div.classList.add('deleteBtnContainer');
         div.insertAdjacentHTML('afterbegin', `
           <div class="deleteBtnWrapper">
-            <p class="confirmParagraph">Are you sure you want to delete ${findIdToDelete.lastName} ${findIdToDelete.firstName}?</p>
+            <div>
+              <button type="button" class="cancel closeDeletePopup">X</button>
+              <p class="confirmParagraph">Are you sure you want to delete ${findIdToDelete.lastName} ${findIdToDelete.firstName}?</p>
+            </div>
             <div class="btnWrapper">
               <button type="button" class="confirm">Yes</button>
               <button type="button" class="cancel">No</button>
@@ -18740,7 +18743,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61525" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52417" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

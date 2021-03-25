@@ -11,8 +11,19 @@
   border-color: transparent;
 }
 
+.add-person,
+.submit-btn,
+.confirm,
+.cancelForm:hover,
+.cancel:hover,
+.cancelAddForm:hover {
+  background-color: #EF4565;
+  color: white;
+  border-color: transparent;
+}
+
+
 .add-person {
-  background: #EF4565;
   opacity: 0.6;
 }
 
@@ -33,14 +44,11 @@
   opacity: 1;
 }
 
-.wrapper-btn {
-  display: flex;
-}
-
-.confirm {
-  margin-right: 32px;
-}
-
+.submit-btn,
+.cancelForm,
+.confirm,
+.cancel,
+.cancelAddForm,
 .add-person {
   padding-top: 15px;
   padding-left: 18px;
@@ -49,8 +57,8 @@
   text-align: center;
   border-radius: 5px;
   color: white;
-  font-size: 18px;
-  line-height: 21px;
+  font-size: 14px;
+  line-height: 18px;
   font-weight: 500;
 }
 
@@ -59,92 +67,55 @@
 .confirm,
 .cancel,
 .cancelAddForm {
-  background: #FFFFFF;
-  border: 2px solid #5F6C7B;
-  box-sizing: border-box;
-  border-radius: 5px;
-  padding-top: 14px;
-  padding-bottom: 15px;
-  padding-left: 21px;
-  padding-right: 16px;
-  font-size: 18px;
-  line-height: 21px;
-  color: #5F6C7B;
-  font-size: 18px;
-  line-height: 21px;
+  flex-basis: 50%;
 }
 
 .cancelForm,
 .cancel,
-.confirm,
-.cancelAddForm,
-.submit-btn {
-  flex-basis: 50%;
+.cancelAddForm {
+  background: #FFFFFF;
+  border: 2px solid #5F6C7B;
+  color: #5F6C7B;
 }
 
-/* .submit-btn {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.confirm,
-.cancel {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-/* .cancelAddForm {
-  padding-top: 08px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 08px;
-} */ */
-
-.cancelForm:hover,
-.cancel:hover,
-.cancelAddForm:hover {
-  background-color: #EF4565;
-  color: white;
-  border-color: transparent;
-}
-
-.submit-btn,
 .confirm {
-  background-color: #EF4565;
-  color: white;
-  border-color: transparent;
+  margin-right: 20px;
 }
 
 .close--addPopup,
-.close--editPopup {
+.close--editPopup,
+.closeDeletePopup {
   background-color: transparent;
-  border: transparent;
+  border-color: white;
   text-align: right;
   width: 100%;
   outline: none;
   font-size: 29px;
   line-height: 29px;
   color: #094067;
-  padding-right: 63.5px;
-  padding-top: 53.5px;
-  padding-bottom: 38.5px;
+}
+
+.closeDeletePopup {
+  padding-top: 16px;
+  padding-bottom: 0;
+  padding-right: 20px;
 }
 
 .close--addPopup:hover,
-.close--editPopup:hover {
+.close--editPopup:hover,
+.closeDeletePopup:hover {
   background-color: white;
   color: black;
 }
 
-@media (max-width: 610px) {
+@media(min-width: 1000px) {
 
-  .submit-btn,
-  .cancelForm,
-  .confirm,
-  .cancel,
-  .cancelAddForm {
-    font-size: 14px;
-    margin-bottom: 1rem;
+  .close--addPopup,
+  .close--editPopup,
+  .closeDeletePopup {
+    padding-right: 63.5px;
+    padding-top: 53.5px;
+    padding-bottom: 38.5px;
   }
 
 }
