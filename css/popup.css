@@ -34,7 +34,8 @@
   padding-bottom: 50px;
 }
 
-.deleteBtnWrapper {
+.deleteBtnWrapper,
+.popup--container {
   overflow-y: hidden;
 }
 
@@ -117,7 +118,7 @@
   align-items: baseline;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1100px) {
 
   .deleteBtnWrapper,
   .addPopup--container,

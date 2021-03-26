@@ -8,15 +8,16 @@
   list-style: none;
   margin-block-end: 1rem;
   padding-top: 22px;
-  padding-left: 48px;
-  padding-right: 25px;
+  padding-left: 16px;
+  padding-right: 16px;
   padding-bottom: 23px;
   border-radius: 5px;
+  width: 100%;
 }
 
 .wrapper {
   display: flex;
-  gap: 40px;
+  gap: 16px;
   align-items: center;
 }
 
@@ -35,27 +36,28 @@
   padding-block-start: 33px;
 }
 
-.birthday {
+.birthday,
+.person-ages-desc,
+.person-name,
+.days,
+.age,
+.birth_date {
   color: #EF4565;
-  font-size: inherit;
+  font-size: 16px;
+  line-height: 20px;
   font-weight: bold;
 }
 
 .person-ages-desc {
-  font-size: 28px;
   font-weight: bold;
 }
 
 .person-name {
-  font-size: 20px;
-  line-height: 25px;
   color: #000000;
 }
 
 .birth_date,
 .age {
-  font-size: 20px;
-  line-height: 25px;
   color: #5F6C7B;
   margin-top: 0;
 }
@@ -65,18 +67,12 @@
 }
 
 .days {
-  font-size: 18px;
-  line-height: 28px;
   color: #5F6C7B;
   margin-bottom: 41px;
 }
 
 .btn--wrapper {
   margin-top: 41px;
-}
-
-.image {
-  margin-right: 16px;
 }
 
 @media (min-width: 1000px) {
@@ -86,6 +82,15 @@
     margin-right: auto;
     padding-inline-start: 0;
     padding-inline-end: 0;
+  }
+
+  .wrapper {
+    gap: 40px;
+  }
+
+  .items {
+    padding-left: 48px;
+    padding-right: 25px;
   }
 
   .birth_date,

@@ -107,7 +107,8 @@ label {
   padding-bottom: 50px;
 }
 
-.deleteBtnWrapper {
+.deleteBtnWrapper,
+.popup--container {
   overflow-y: hidden;
 }
 
@@ -190,7 +191,7 @@ label {
   align-items: baseline;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1100px) {
 
   .deleteBtnWrapper,
   .addPopup--container,
@@ -240,15 +241,16 @@ label {
   list-style: none;
   margin-block-end: 1rem;
   padding-top: 22px;
-  padding-left: 48px;
-  padding-right: 25px;
+  padding-left: 16px;
+  padding-right: 16px;
   padding-bottom: 23px;
   border-radius: 5px;
+  width: 100%;
 }
 
 .wrapper {
   display: flex;
-  gap: 40px;
+  gap: 16px;
   align-items: center;
 }
 
@@ -267,27 +269,28 @@ label {
   padding-block-start: 33px;
 }
 
-.birthday {
+.birthday,
+.person-ages-desc,
+.person-name,
+.days,
+.age,
+.birth_date {
   color: #EF4565;
-  font-size: inherit;
+  font-size: 16px;
+  line-height: 20px;
   font-weight: bold;
 }
 
 .person-ages-desc {
-  font-size: 28px;
   font-weight: bold;
 }
 
 .person-name {
-  font-size: 20px;
-  line-height: 25px;
   color: #000000;
 }
 
 .birth_date,
 .age {
-  font-size: 20px;
-  line-height: 25px;
   color: #5F6C7B;
   margin-top: 0;
 }
@@ -297,18 +300,12 @@ label {
 }
 
 .days {
-  font-size: 18px;
-  line-height: 28px;
   color: #5F6C7B;
   margin-bottom: 41px;
 }
 
 .btn--wrapper {
   margin-top: 41px;
-}
-
-.image {
-  margin-right: 16px;
 }
 
 @media (min-width: 1000px) {
@@ -318,6 +315,15 @@ label {
     margin-right: auto;
     padding-inline-start: 0;
     padding-inline-end: 0;
+  }
+
+  .wrapper {
+    gap: 40px;
+  }
+
+  .items {
+    padding-left: 48px;
+    padding-right: 25px;
   }
 
   .birth_date,
@@ -337,9 +343,9 @@ label {
 
 .form {
   border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 35px;
   align-items: flex-end;
   margin-block-end: 47px;
 }
@@ -380,8 +386,22 @@ label {
   padding-bottom: 14px;
 }
 
+.form__input:focus,
+.form__select:focus {
+  outline: none;
+  border-color: blue;
+}
+
 .form__input {
   padding-top: 19px;
+}
+
+.form__select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("/arrow_down.3f2c2ab6.svg")
+    white no-repeat 239px !important;
 }
 
 .form__fieldset,
@@ -394,6 +414,13 @@ label {
   .form__input,
   .form__select {
     padding-right: 20px;
+  }
+}
+
+@media(max-width: 700px) {
+  .form {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
   }
 }
 

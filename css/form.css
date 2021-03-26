@@ -1,8 +1,8 @@
 .form {
   border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 35px;
   align-items: flex-end;
   margin-block-end: 47px;
 }
@@ -43,8 +43,22 @@
   padding-bottom: 14px;
 }
 
+.form__input:focus,
+.form__select:focus {
+  outline: none;
+  border-color: blue;
+}
+
 .form__input {
   padding-top: 19px;
+}
+
+.form__select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("../assets/arrow_down.svg")
+    white no-repeat 239px !important;
 }
 
 .form__fieldset,
@@ -57,6 +71,13 @@
   .form__input,
   .form__select {
     padding-right: 20px;
+  }
+}
+
+@media(max-width: 700px) {
+  .form {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
   }
 }
 
