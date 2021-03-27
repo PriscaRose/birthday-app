@@ -4,6 +4,7 @@ import {
   addYears,
   setYear,
   isToday,
+  format
 } from 'date-fns';
 
 const getAge = (date1, date2) => {
@@ -44,14 +45,21 @@ function calculateDaysToBirhtday(personToCalculate) {
 }
 
 export const displayPerson = (people) => {
-  console.log('Iam   peole', people)
   //Display the date
   const sortedPeople = people.sort(function(person1, person2) {
   return calculateDaysToBirhtday(person1) - calculateDaysToBirhtday(person2)});
   return sortedPeople.map(person => {
     const ages = getAge(new Date(person.birthday));
+
+    const newbirthday = new Date(person.birthday);
+    const today = new Date();
+    let nextBirthday = setYear(newbirthday, today.getFullYear())
+    console.log(nextBirthday);
+    const monthOfBirthday = format(new Date(nextBirthday), 'MMMM')
+    const dayOfNextBirthday = format(new Date(nextBirthday), 'io')
+
     const birthday = new Date(person.birthday);
-    let newDay = birthday.getDay() + 1;
+    let newDay = birthday.getDay();
     const month =  birthday.toLocaleString('en-us', { month: 'long' });
 
     if (newDay == 1 || newDay == 21 || newDay == 31) {
@@ -73,7 +81,7 @@ export const displayPerson = (people) => {
                   <img class="image" src="${person.picture}" alt="image">
                   <div class="name-wrapper">
                       <span class="person-name">${person.firstName} ${person.lastName}</span>
-                    <p class="birth_date">Turns <span class="age">${ages}</span> on ${month} ${newDay}</p>
+                    <p class="birth_date">Turns <span class="age">${ages}</span> on ${monthOfBirthday} ${dayOfNextBirthday}</p>
                     </div>
                 </div>
                 <div>

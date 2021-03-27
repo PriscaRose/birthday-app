@@ -51,8 +51,8 @@
 .cancelAddForm,
 .add-person {
   padding-top: 15px;
-  padding-left: 18px;
-  padding-right: 11px;
+  padding-left: 21px;
+  padding-right: 16px;
   padding-bottom: 14px;
   text-align: center;
   border-radius: 5px;
@@ -108,7 +108,7 @@
   color: black;
 }
 
-@media(min-width: 1000px) {
+@media(min-width: 1300px) {
 
   .close--addPopup,
   .close--editPopup,
@@ -116,6 +116,28 @@
     padding-right: 63.5px;
     padding-top: 53.5px;
     padding-bottom: 38.5px;
+  }
+
+  .submit-btn,
+  .cancelForm,
+  .confirm,
+  .cancel,
+  .cancelAddForm,
+  .add-person {
+    font-size: 18px;
+    line-height: 21px;
+   }
+
+   .add-person {
+     padding-inline-start: 0;
+     padding-inline-end: 0;
+   }
+
+  .close--addPopup,
+  .close--editPopup,
+  .closeDeletePopup {
+    font-size: 29px;
+    line-height: 29px;
   }
 
 }

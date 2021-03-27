@@ -6,7 +6,7 @@
 .items {
   background-color: #fffffe;
   list-style: none;
-  margin-block-end: 1rem;
+  margin-block-end: 31px;
   padding-top: 22px;
   padding-left: 16px;
   padding-right: 16px;
@@ -75,7 +75,7 @@
   margin-top: 41px;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1300px) {
   .container {
     max-width: 779px;
     margin-left: auto;
@@ -89,15 +89,30 @@
   }
 
   .items {
-    padding-left: 48px;
+    padding-left: 43px;
     padding-right: 25px;
+  }
+
+  .name-wrapper {
+    gap: 0;
+    padding-top: 0;
+  }
+
+  .birth_date,
+  .age {
+    margin-bottom: 0;
   }
 
   .birth_date,
   .age,
-  .person-name{
+  .days {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .person-name {
     font-size: 36px;
-    line-height: 23px;
+    line-height: 43px;
   }
 
   .days {

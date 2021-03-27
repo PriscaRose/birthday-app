@@ -57,12 +57,14 @@ export async function fetchPerson() {
     popup.remove();
     // remove it from the js memory
     popup = null;
+    body.style.overflow = 'visible';
   }
 
   // edit the popup
   function editPopup(id) {
     const personToEdit = people.find(person => person.id == id);
     const birthday = new Date(personToEdit.birthday).toISOString().slice(0, 10);
+    console.log(birthday);
     const today = new Date().toISOString().slice(0, 10);
 
     return new Promise(async function () {
@@ -100,7 +102,13 @@ export async function fetchPerson() {
         e.preventDefault();
         personToEdit.lastName = popup.lastName.value;
         personToEdit.firstName = popup.firstName.value;
-        personToEdit.birthday = popup.birthday.value;
+        const toTimestamp=(strDate)=>{
+          let datum = Date.parse(strDate);
+          return datum;
+       }
+       personToEdit.birthday = toTimestamp(popup.birthday.value);
+
+        // personToEdit.birthday = popup.birthday.value;
 
         const upadatedPeople = people.map(person => {
           if(personToEdit.id === person.id) {
@@ -138,7 +146,7 @@ export async function fetchPerson() {
       const id = btn.value;
       deleteBtn(id);
       const div = document.querySelector('.deleteBtnContainer');
-      destroyPopup(div)
+      destroyPopup(div);
     }
   }
 
@@ -205,7 +213,6 @@ export async function fetchPerson() {
       list.dispatchEvent(new CustomEvent('listUpdated'));
       formEl.reset();
       destroyPopup(formEl);
-      body.style.overflow = 'visible';
     };
 
     form.addEventListener('submit', displayNewPer);
@@ -243,19 +250,17 @@ export async function fetchPerson() {
     if (e.target.closest('.cancel')) {
       const divEl = document.querySelector('.deleteBtnContainer');
       destroyPopup(divEl);
-      body.style.overflow = 'visible';
     }
 
     if (e.target.matches('button.cancelForm')) {
       const form = document.querySelector('.popup');
       destroyPopup(form);
-      body.style.overflow = 'visible';
+      // body.style.overflow = 'visible';
     };
 
     if (e.target.matches('button.cancelAddForm')) {
       const addForm = document.querySelector('.addPopup');
       destroyPopup(addForm);
-      body.style.overflow = 'visible';
     };
 
   }

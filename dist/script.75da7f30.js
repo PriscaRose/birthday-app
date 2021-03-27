@@ -18354,15 +18354,20 @@ function calculateDaysToBirhtday(personToCalculate) {
 }
 
 const displayPerson = people => {
-  console.log('Iam   peole', people); //Display the date
-
+  //Display the date
   const sortedPeople = people.sort(function (person1, person2) {
     return calculateDaysToBirhtday(person1) - calculateDaysToBirhtday(person2);
   });
   return sortedPeople.map(person => {
     const ages = getAge(new Date(person.birthday));
+    const newbirthday = new Date(person.birthday);
+    const today = new Date();
+    let nextBirthday = (0, _dateFns.setYear)(newbirthday, today.getFullYear());
+    console.log(nextBirthday);
+    const monthOfBirthday = (0, _dateFns.format)(new Date(nextBirthday), 'MMMM');
+    const dayOfNextBirthday = (0, _dateFns.format)(new Date(nextBirthday), 'io');
     const birthday = new Date(person.birthday);
-    let newDay = birthday.getDay() + 1;
+    let newDay = birthday.getDay();
     const month = birthday.toLocaleString('en-us', {
       month: 'long'
     });
@@ -18383,7 +18388,7 @@ const displayPerson = people => {
                   <img class="image" src="${person.picture}" alt="image">
                   <div class="name-wrapper">
                       <span class="person-name">${person.firstName} ${person.lastName}</span>
-                    <p class="birth_date">Turns <span class="age">${ages}</span> on ${month} ${newDay}</p>
+                    <p class="birth_date">Turns <span class="age">${ages}</span> on ${monthOfBirthday} ${dayOfNextBirthday}</p>
                     </div>
                 </div>
                 <div>
@@ -18467,12 +18472,14 @@ async function fetchPerson() {
     popup.remove(); // remove it from the js memory
 
     popup = null;
+    _elements.body.style.overflow = 'visible';
   } // edit the popup
 
 
   function editPopup(id) {
     const personToEdit = people.find(person => person.id == id);
     const birthday = new Date(personToEdit.birthday).toISOString().slice(0, 10);
+    console.log(birthday);
     const today = new Date().toISOString().slice(0, 10);
     return new Promise(async function () {
       const popup = document.createElement('form');
@@ -18508,7 +18515,14 @@ async function fetchPerson() {
         e.preventDefault();
         personToEdit.lastName = popup.lastName.value;
         personToEdit.firstName = popup.firstName.value;
-        personToEdit.birthday = popup.birthday.value;
+
+        const toTimestamp = strDate => {
+          let datum = Date.parse(strDate);
+          return datum;
+        };
+
+        personToEdit.birthday = toTimestamp(popup.birthday.value); // personToEdit.birthday = popup.birthday.value;
+
         const upadatedPeople = people.map(person => {
           if (personToEdit.id === person.id) {
             return personToEdit;
@@ -18616,7 +18630,6 @@ async function fetchPerson() {
 
       formEl.reset();
       destroyPopup(formEl);
-      _elements.body.style.overflow = 'visible';
     };
 
     form.addEventListener('submit', displayNewPer);
@@ -18655,13 +18668,11 @@ async function fetchPerson() {
     if (e.target.closest('.cancel')) {
       const divEl = document.querySelector('.deleteBtnContainer');
       destroyPopup(divEl);
-      _elements.body.style.overflow = 'visible';
     }
 
     if (e.target.matches('button.cancelForm')) {
       const form = document.querySelector('.popup');
-      destroyPopup(form);
-      _elements.body.style.overflow = 'visible';
+      destroyPopup(form); // body.style.overflow = 'visible';
     }
 
     ;
@@ -18669,7 +18680,6 @@ async function fetchPerson() {
     if (e.target.matches('button.cancelAddForm')) {
       const addForm = document.querySelector('.addPopup');
       destroyPopup(addForm);
-      _elements.body.style.overflow = 'visible';
     }
 
     ;
@@ -18743,7 +18753,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56978" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63022" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
