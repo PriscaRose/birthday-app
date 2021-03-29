@@ -18335,18 +18335,18 @@ function calculateDaysToBirhtday(personToCalculate) {
 
   if ((0, _dateFns.isToday)(nextBirthday)) {
     return `<li class="items" id="${person.id}">
-              <img class="image" src="${person.picture}" alt="">
-              <div class="birthdaay-wrapper">
-                <h2>Happy birthady <span class="birthday">${person.firstName}  ${person.lastName}<span></h2>
-                <p class="person-ages-desc">You turn <span class="birthday">${ages}</span> years old today</p>
-              </div>
-              <div>
-                <div class="btn--wrapper">
-                  <button class="edit" value="${person.id}">edit</button>
-                  <button class="delete" value="${person.id}">delete</button>
-                </div>
-              </div>
-              </li>`;
+    <img class="image" src="${person.picture}" alt="">
+    <div class="birthdaay-wrapper">
+    <h2>Happy birthady <span class="birthday">${person.firstName}  ${person.lastName}<span></h2>
+    <p class="person-ages-desc">You turn <span class="birthday">${ages}</span> years old today</p>
+    </div>
+    <div>
+    <div class="btn--wrapper">
+    <button class="edit" value="${person.id}">edit</button>
+    <button class="delete" value="${person.id}">delete</button>
+    </div>
+    </div>
+    </li>`;
   }
 
   const numberOfDays = (0, _dateFns.differenceInCalendarDays)(nextBirthday, today);
@@ -18357,49 +18357,44 @@ const displayPerson = people => {
   //Display the date
   const sortedPeople = people.sort(function (person1, person2) {
     return calculateDaysToBirhtday(person1) - calculateDaysToBirhtday(person2);
-  });
+  }); // debugger;
+
   return sortedPeople.map(person => {
     const ages = getAge(new Date(person.birthday));
     const newbirthday = new Date(person.birthday);
     const today = new Date();
     let nextBirthday = (0, _dateFns.setYear)(newbirthday, today.getFullYear());
-    console.log(nextBirthday);
     const monthOfBirthday = (0, _dateFns.format)(new Date(nextBirthday), 'MMMM');
-    const dayOfNextBirthday = (0, _dateFns.format)(new Date(nextBirthday), 'io');
-    const birthday = new Date(person.birthday);
-    let newDay = birthday.getDay();
-    const month = birthday.toLocaleString('en-us', {
-      month: 'long'
-    });
+    let dayOfNextBirthday = nextBirthday.getDate();
 
-    if (newDay == 1 || newDay == 21 || newDay == 31) {
-      newDay += "st";
-    } else if (newDay == 2 || newDay == 22) {
-      newDay += "nd";
+    if (dayOfNextBirthday == 1 || dayOfNextBirthday == 21 || dayOfNextBirthday == 31) {
+      dayOfNextBirthday += "st";
+    } else if (dayOfNextBirthday == 2 || dayOfNextBirthday == 22) {
+      dayOfNextBirthday += "nd";
     } else {
-      newDay += "th";
+      dayOfNextBirthday += "th";
     }
 
     const numberOfDays = calculateDaysToBirhtday(person); //Generate html
 
     return `
-              <li class="items" id="${person.id}">
-                <div class="wrapper">
-                  <img class="image" src="${person.picture}" alt="image">
-                  <div class="name-wrapper">
-                      <span class="person-name">${person.firstName} ${person.lastName}</span>
-                    <p class="birth_date">Turns <span class="age">${ages}</span> on ${monthOfBirthday} ${dayOfNextBirthday}</p>
-                    </div>
-                </div>
-                <div>
-                  <span class="days">${numberOfDays} days</span>
-                  <div class="btn--wrapper">
-                    <button class="edit" value="${person.id}">edit</button>
-                    <button class="delete" value="${person.id}">delete</button>
-                  </div>
-                </div>
-                </li>
-          `;
+      <li class="items" id="${person.id}">
+      <div class="wrapper">
+      <img class="image" src="${person.picture}" alt="image">
+      <div class="name-wrapper">
+      <span class="person-name">${person.firstName} ${person.lastName}</span>
+      <p class="birth_date">Turns <span class="age">${ages}</span> on ${monthOfBirthday} ${dayOfNextBirthday}</p>
+      </div>
+      </div>
+      <div>
+      <span class="days">${numberOfDays} days</span>
+      <div class="btn--wrapper">
+      <button class="edit" value="${person.id}">edit</button>
+      <button class="delete" value="${person.id}">delete</button>
+      </div>
+      </div>
+      </li>
+      `;
   }).join('');
 };
 
@@ -18421,8 +18416,9 @@ async function fetchPerson() {
   const response = await fetch('https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/b17e08696906abeaac8bc260f57738eaa3f6abb1/birthdayPeople.json');
   let people = await response.json(); // Display person list
 
-  function displayList() {
-    const html = (0, _displayList.displayPerson)(people);
+  function displayList(upadatedPeople) {
+    const peopleToDisplay = upadatedPeople && upadatedPeople.length ? upadatedPeople : people;
+    const html = (0, _displayList.displayPerson)(peopleToDisplay);
     _elements.list.innerHTML = html;
   }
 
@@ -18479,7 +18475,6 @@ async function fetchPerson() {
   function editPopup(id) {
     const personToEdit = people.find(person => person.id == id);
     const birthday = new Date(personToEdit.birthday).toISOString().slice(0, 10);
-    console.log(birthday);
     const today = new Date().toISOString().slice(0, 10);
     return new Promise(async function () {
       const popup = document.createElement('form');
@@ -18521,8 +18516,7 @@ async function fetchPerson() {
           return datum;
         };
 
-        personToEdit.birthday = toTimestamp(popup.birthday.value); // personToEdit.birthday = popup.birthday.value;
-
+        personToEdit.birthday = toTimestamp(popup.birthday.value);
         const upadatedPeople = people.map(person => {
           if (personToEdit.id === person.id) {
             return personToEdit;
@@ -18530,7 +18524,7 @@ async function fetchPerson() {
 
           return person;
         });
-        (0, _displayList.displayPerson)(upadatedPeople);
+        displayList(upadatedPeople);
         destroyPopup(popup);
 
         _elements.list.dispatchEvent(new CustomEvent('listUpdated'));
@@ -18711,7 +18705,7 @@ async function fetchPerson() {
 
   _elements.list.addEventListener('click', editPopupPartener);
 
-  _elements.list.addEventListener('listUpdated', displayList);
+  _elements.list.addEventListener('listUpdated', displayList, people);
 
   _elements.list.addEventListener('listUpdated', setToLocalStorage);
 
@@ -18753,7 +18747,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63022" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65132" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -7,8 +7,9 @@ export async function fetchPerson() {
   let people = await response.json();
 
   // Display person list
-  function displayList() {
-    const html = displayPerson(people)
+  function displayList(upadatedPeople) {
+    const peopleToDisplay = upadatedPeople && upadatedPeople.length ? upadatedPeople : people;
+    const html = displayPerson(peopleToDisplay)
     list.innerHTML = html;
   }
 
@@ -64,9 +65,7 @@ export async function fetchPerson() {
   function editPopup(id) {
     const personToEdit = people.find(person => person.id == id);
     const birthday = new Date(personToEdit.birthday).toISOString().slice(0, 10);
-    console.log(birthday);
     const today = new Date().toISOString().slice(0, 10);
-
     return new Promise(async function () {
       const popup = document.createElement('form');
       popup.classList.add('popup');
@@ -107,17 +106,13 @@ export async function fetchPerson() {
           return datum;
        }
        personToEdit.birthday = toTimestamp(popup.birthday.value);
-
-        // personToEdit.birthday = popup.birthday.value;
-
         const upadatedPeople = people.map(person => {
           if(personToEdit.id === person.id) {
             return personToEdit;
           }
           return person
         })
-
-        displayPerson(upadatedPeople);
+        displayList(upadatedPeople);
         destroyPopup(popup);
         list.dispatchEvent(new CustomEvent('listUpdated'));
       });
@@ -284,7 +279,7 @@ export async function fetchPerson() {
   window.addEventListener('click', handleClick);
   addBtn.addEventListener('click', addPerson);
   list.addEventListener('click', editPopupPartener);
-  list.addEventListener('listUpdated', displayList);
+  list.addEventListener('listUpdated', displayList, people);
   list.addEventListener('listUpdated', setToLocalStorage);
   filterSearchInput.addEventListener('keyup',()=> filterBothNameAndMonth());
   filterMonthInput.addEventListener('change', () => filterBothNameAndMonth());

@@ -1,5 +1,5 @@
 import {
-	differenceInCalendarDays,
+  differenceInCalendarDays,
   isPast,
   addYears,
   setYear,
@@ -26,18 +26,18 @@ function calculateDaysToBirhtday(personToCalculate) {
   }
   if (isToday(nextBirthday)) {
     return `<li class="items" id="${person.id}">
-              <img class="image" src="${person.picture}" alt="">
-              <div class="birthdaay-wrapper">
-                <h2>Happy birthady <span class="birthday">${person.firstName}  ${person.lastName}<span></h2>
-                <p class="person-ages-desc">You turn <span class="birthday">${ages}</span> years old today</p>
-              </div>
-              <div>
-                <div class="btn--wrapper">
-                  <button class="edit" value="${person.id}">edit</button>
-                  <button class="delete" value="${person.id}">delete</button>
-                </div>
-              </div>
-              </li>`;
+    <img class="image" src="${person.picture}" alt="">
+    <div class="birthdaay-wrapper">
+    <h2>Happy birthady <span class="birthday">${person.firstName}  ${person.lastName}<span></h2>
+    <p class="person-ages-desc">You turn <span class="birthday">${ages}</span> years old today</p>
+    </div>
+    <div>
+    <div class="btn--wrapper">
+    <button class="edit" value="${person.id}">edit</button>
+    <button class="delete" value="${person.id}">delete</button>
+    </div>
+    </div>
+    </li>`;
   }
 
   const numberOfDays = differenceInCalendarDays(nextBirthday, today)
@@ -47,51 +47,48 @@ function calculateDaysToBirhtday(personToCalculate) {
 export const displayPerson = (people) => {
   //Display the date
   const sortedPeople = people.sort(function(person1, person2) {
-  return calculateDaysToBirhtday(person1) - calculateDaysToBirhtday(person2)});
-  return sortedPeople.map(person => {
-    const ages = getAge(new Date(person.birthday));
+    return calculateDaysToBirhtday(person1) - calculateDaysToBirhtday(person2)
+  });
+    // debugger;
+     return sortedPeople.map(person => {
+      const ages = getAge(new Date(person.birthday));
 
-    const newbirthday = new Date(person.birthday);
-    const today = new Date();
-    let nextBirthday = setYear(newbirthday, today.getFullYear())
-    console.log(nextBirthday);
-    const monthOfBirthday = format(new Date(nextBirthday), 'MMMM')
-    const dayOfNextBirthday = format(new Date(nextBirthday), 'io')
+      const newbirthday = new Date(person.birthday);
+      const today = new Date();
+      let nextBirthday = setYear(newbirthday, today.getFullYear())
+      const monthOfBirthday = format(new Date(nextBirthday), 'MMMM')
+      let dayOfNextBirthday = nextBirthday.getDate();
 
-    const birthday = new Date(person.birthday);
-    let newDay = birthday.getDay();
-    const month =  birthday.toLocaleString('en-us', { month: 'long' });
+      if (dayOfNextBirthday == 1 || dayOfNextBirthday == 21 || dayOfNextBirthday == 31) {
+        dayOfNextBirthday += "st";
+      }
+      else if (dayOfNextBirthday == 2 || dayOfNextBirthday == 22) {
+        dayOfNextBirthday += "nd";
+      }
+      else {
+        dayOfNextBirthday += "th";
+      }
 
-    if (newDay == 1 || newDay == 21 || newDay == 31) {
-      newDay += "st";
-    }
-    else if (newDay == 2 || newDay == 22) {
-      newDay += "nd";
-    }
-    else {
-      newDay += "th";
-    }
+      const numberOfDays = calculateDaysToBirhtday(person);
 
-    const numberOfDays = calculateDaysToBirhtday(person);
-
-    //Generate html
-    return `
-              <li class="items" id="${person.id}">
-                <div class="wrapper">
-                  <img class="image" src="${person.picture}" alt="image">
-                  <div class="name-wrapper">
-                      <span class="person-name">${person.firstName} ${person.lastName}</span>
-                    <p class="birth_date">Turns <span class="age">${ages}</span> on ${monthOfBirthday} ${dayOfNextBirthday}</p>
-                    </div>
-                </div>
-                <div>
-                  <span class="days">${numberOfDays} days</span>
-                  <div class="btn--wrapper">
-                    <button class="edit" value="${person.id}">edit</button>
-                    <button class="delete" value="${person.id}">delete</button>
-                  </div>
-                </div>
-                </li>
-          `;
-  }).join('');
-};
+      //Generate html
+      return `
+      <li class="items" id="${person.id}">
+      <div class="wrapper">
+      <img class="image" src="${person.picture}" alt="image">
+      <div class="name-wrapper">
+      <span class="person-name">${person.firstName} ${person.lastName}</span>
+      <p class="birth_date">Turns <span class="age">${ages}</span> on ${monthOfBirthday} ${dayOfNextBirthday}</p>
+      </div>
+      </div>
+      <div>
+      <span class="days">${numberOfDays} days</span>
+      <div class="btn--wrapper">
+      <button class="edit" value="${person.id}">edit</button>
+      <button class="delete" value="${person.id}">delete</button>
+      </div>
+      </div>
+      </li>
+      `;
+    }).join('');
+  };

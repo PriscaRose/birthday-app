@@ -28,16 +28,16 @@
 	gap: 10px;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(3, 1fr);
-  overflow-y: auto;
+  overflow-y: scroll;
   padding-left: 16px;
   padding-right: 16px;
   padding-bottom: 50px;
 }
 
-.deleteBtnWrapper,
+/* .deleteBtnWrapper,
 .popup--container {
   overflow-y: hidden;
-}
+} */
 
 .popup.open {
   pointer-events: all;
