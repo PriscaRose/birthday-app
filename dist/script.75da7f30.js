@@ -18483,23 +18483,23 @@ async function fetchPerson() {
               <div class="popup--container">
                 <div class="header--wrapper">
                   <button class="cancelForm close--editPopup">X</button>
-                  <h2 class="popup__heading">Edit ${personToEdit.lastName} ${personToEdit.firstName}</h2>
+                  <h2 class="editPopup__heading">Edit ${personToEdit.lastName} ${personToEdit.firstName}</h2>
                 </div>
-                <div class="popup--wrapper">
-                  <fieldset class="popup__fieldset">
-                    <label class="popup__label" for="name">LastName</label>
-                    <input type="text" class="popup__input" name="lastName" id="name" value="${personToEdit.lastName}"/>
+                <div class="editPopup--wrapper">
+                  <fieldset class="editPopup__fieldset">
+                    <label class="editPopup__label" for="name">LastName</label>
+                    <input type="text" class="editPopup__input" name="lastName" id="name" value="${personToEdit.lastName}"/>
                   </fieldset>
-                  <fieldset class="popup__fieldset">
-                    <label class="popup__label" for="firstName">Firstname</label>
-                    <input type="text" class="popup__input" name="firstName" id="firstName" value="${personToEdit.firstName}"/>
+                  <fieldset class="editPopup__fieldset">
+                    <label class="editPopup__label" for="firstName">Firstname</label>
+                    <input type="text" class="editPopup__input" name="firstName" id="firstName" value="${personToEdit.firstName}"/>
                   </fieldset>
-                  <feldset class="popup__fieldset">
-                    <label class="popup__label" for="birthday">Birthday</label>
-                    <input type="date" class="popup__input" name="birthday" id="birthday" max="${today}" value="${birthday}" />
+                  <feldset class="editPopup__fieldset">
+                    <label class="editPopup__label" for="birthday">Birthday</label>
+                    <input type="date" class="editPopup__input" name="birthday" id="birthday" max="${today}" value="${birthday}" />
                   </feldset>
                 </div>
-                <div class="popup__button--wrapper">
+                <div class="editPopup__button--wrapper">
                   <button type="submit" class="submit-btn">Save changes</button>
                   <button type="button" class="cancelForm">Cancel</button>
                 </div>
@@ -18575,23 +18575,23 @@ async function fetchPerson() {
             <div class="addPopup--container">
               <div class="header--wrapper">
                 <button class="cancelAddForm close--addPopup">X</button>
-                <h2 class="addPopup__heading"> Add a new person's birthday here</h2>
+                <h2 class="addPopup__heading"> Add new people</h2>
               </div>
               <div class="addPopup--wrapper">
                 <fieldset class="addPopup__fieldset">
-                  <label class="popup__label" for="picture">Add a picture</label>
+                  <label class="addPopup__label" for="picture">Add a picture</label>
                   <input type="url"  class="addPopup__input"class="picture" id="picture" name="picture" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">
-                  <label class="popup__label" for="name">Last name</label>
+                  <label class="addPopup__label" for="name">Last name</label>
                   <input type="text" class="addPopup__input" id="name" name="lastName" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">
-                  <label class="popup__label" for="firstName">First name</label>
+                  <label class="addPopup__label" for="firstName">First name</label>
                   <input type="text" class="addPopup__input" id="firstName" name="firstName" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">
-                  <label class="popup__label" for="birthday">Birthday</label>
+                  <label class="addPopup__label" for="birthday">Birthday</label>
                   <input type="date" class="addPopup__input" id="birthday" name="birthday" value="" required/>
                 </fieldset>
               </div>
@@ -18747,7 +18747,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65132" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60238" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

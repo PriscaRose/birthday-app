@@ -52,7 +52,6 @@ export const displayPerson = (people) => {
     // debugger;
      return sortedPeople.map(person => {
       const ages = getAge(new Date(person.birthday));
-
       const newbirthday = new Date(person.birthday);
       const today = new Date();
       let nextBirthday = setYear(newbirthday, today.getFullYear())
