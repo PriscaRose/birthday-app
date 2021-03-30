@@ -164,15 +164,15 @@ export async function fetchPerson() {
               </div>
               <div class="addPopup--wrapper">
                 <fieldset class="addPopup__fieldset">
-                  <label class="addPopup__label" for="picture">Add a picture</label>
+                  <label class="addPopup__label" for="picture">Picture</label>
                   <input type="url"  class="addPopup__input"class="picture" id="picture" name="picture" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">
-                  <label class="addPopup__label" for="name">Last name</label>
+                  <label class="addPopup__label" for="name">Lastname</label>
                   <input type="text" class="addPopup__input" id="name" name="lastName" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">
-                  <label class="addPopup__label" for="firstName">First name</label>
+                  <label class="addPopup__label" for="firstName">Firstname</label>
                   <input type="text" class="addPopup__input" id="firstName" name="firstName" value="" required/>
                 </fieldset>
                 <fieldset class="addPopup__fieldset">

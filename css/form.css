@@ -46,7 +46,6 @@
 .form__input:focus,
 .form__select:focus {
   outline: none;
-  border-color: blue;
 }
 
 .form__input {
@@ -105,12 +104,5 @@
   .form__input,
   .form__select {
     height: 50px;
-  }
-
-  .form__input,
-  .form__select {
-    padding: 0;
-    padding-right: 11px;
-    padding-left: 20px;
   }
 }

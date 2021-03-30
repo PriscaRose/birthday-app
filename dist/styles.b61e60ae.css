@@ -107,11 +107,6 @@ label {
   padding-bottom: 50px;
 }
 
-/* .deleteBtnWrapper,
-.popup--container {
-  overflow-y: hidden;
-} */
-
 .popup.open {
   pointer-events: all;
   opacity: 1;
@@ -176,8 +171,11 @@ label {
   background: #D8EEFE;
   border-radius: 5px;
   width: 80%;
-  padding-top: 15px;
-  padding-bottom: 14px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #094067;
+  height: 50px;
   padding-left: 16px;
   padding-right: 16px;
   margin-top: 8px;
@@ -250,9 +248,11 @@ label {
     margin-right: auto;
   }
 
-  .addPopup__input {
+  .addPopup__input,
+  .editPopup__input {
     width: 264px;
-    height: 50px;
+    padding: 0;
+    padding-left: 20px;
   }
 
   .addPopup__label,
@@ -437,7 +437,6 @@ label {
 .form__input:focus,
 .form__select:focus {
   outline: none;
-  border-color: blue;
 }
 
 .form__input {
@@ -497,13 +496,6 @@ label {
   .form__select {
     height: 50px;
   }
-
-  .form__input,
-  .form__select {
-    padding: 0;
-    padding-right: 11px;
-    padding-left: 20px;
-  }
 }
 
 .delete,
@@ -528,15 +520,6 @@ label {
   background-color: #EF4565;
   color: white;
   border-color: transparent;
-}
-
-
-.add-person {
-  opacity: 0.6;
-}
-
-.add-person:hover {
-  opacity: 1;
 }
 
 .edit {

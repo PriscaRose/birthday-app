@@ -34,11 +34,6 @@
   padding-bottom: 50px;
 }
 
-/* .deleteBtnWrapper,
-.popup--container {
-  overflow-y: hidden;
-} */
-
 .popup.open {
   pointer-events: all;
   opacity: 1;
@@ -103,8 +98,11 @@
   background: #D8EEFE;
   border-radius: 5px;
   width: 80%;
-  padding-top: 15px;
-  padding-bottom: 14px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #094067;
+  height: 50px;
   padding-left: 16px;
   padding-right: 16px;
   margin-top: 8px;
@@ -177,9 +175,11 @@
     margin-right: auto;
   }
 
-  .addPopup__input {
+  .addPopup__input,
+  .editPopup__input {
     width: 264px;
-    height: 50px;
+    padding: 0;
+    padding-left: 20px;
   }
 
   .addPopup__label,
