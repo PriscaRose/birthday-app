@@ -35,21 +35,21 @@
   color: #5F6C7B;
 }
 
+.add-person,
 .form__select,
 .form__input {
-  padding-top: 15px;
+  height: 50px;
+}
+
+.form__select,
+.form__input {
   padding-left: 18px;
   padding-right: 129px;
-  padding-bottom: 14px;
 }
 
 .form__input:focus,
 .form__select:focus {
   outline: none;
-}
-
-.form__input {
-  padding-top: 19px;
 }
 
 .form__select {
@@ -98,11 +98,5 @@
   .form__select {
     background: url("../assets/arrow_down.svg")
     white no-repeat 239px !important;
-  }
-
-  .add-person,
-  .form__input,
-  .form__select {
-    height: 50px;
   }
 }

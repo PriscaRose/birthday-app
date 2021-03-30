@@ -171,11 +171,11 @@ label {
   background: #D8EEFE;
   border-radius: 5px;
   width: 80%;
+  height: 50px;
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
   color: #094067;
-  height: 50px;
   padding-left: 16px;
   padding-right: 16px;
   margin-top: 8px;
@@ -426,21 +426,21 @@ label {
   color: #5F6C7B;
 }
 
+.add-person,
 .form__select,
 .form__input {
-  padding-top: 15px;
+  height: 50px;
+}
+
+.form__select,
+.form__input {
   padding-left: 18px;
   padding-right: 129px;
-  padding-bottom: 14px;
 }
 
 .form__input:focus,
 .form__select:focus {
   outline: none;
-}
-
-.form__input {
-  padding-top: 19px;
 }
 
 .form__select {
@@ -490,12 +490,6 @@ label {
     background: url("/arrow_down.3f2c2ab6.svg")
     white no-repeat 239px !important;
   }
-
-  .add-person,
-  .form__input,
-  .form__select {
-    height: 50px;
-  }
 }
 
 .delete,
@@ -541,16 +535,19 @@ label {
 .cancel,
 .cancelAddForm,
 .add-person {
-  padding-top: 15px;
+ height: 50px;
   padding-left: 21px;
   padding-right: 16px;
-  padding-bottom: 14px;
   text-align: center;
   border-radius: 5px;
   color: white;
   font-size: 14px;
   line-height: 18px;
   font-weight: 500;
+}
+
+.add-person {
+  padding: 0;
 }
 
 .submit-btn,
