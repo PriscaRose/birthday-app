@@ -19,18 +19,18 @@ This App is build to remind the user's birthday in the future. It allows user to
 - Local storage that stores the data locally
 
 ### 5- Built with
-- [Vanilla js](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [Vanilla JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [Bootstrap](https://getbootstrap.com/)
 - [Date-fns](https://date-fns.org/)
-- Figma](https://www.figma.com/file/bb1Mie5R3mUhR77PtGG8bJ/Birthday-App?node-id=0%3A1)
+- [Figma](https://www.figma.com/file/bb1Mie5R3mUhR77PtGG8bJ/Birthday-App?node-id=0%3A1)
 
 ### 6- How to use it
  
-You need to get the dependency with 'npm init' and then install react by doing this 'npm install react ' and then run parcel by 'parcel index.htm'.
+You need to get the dependency with 'npm init' and then install react by doing this 'npm install react ' and then run parcel by 'parcel index.html'.
  
  ```bash
 # Clone this repository
-$ git clone https://github.com/lightme-fan/birthday-app
+$ git clone https://github.com/ravinalamada/birthday-app
 
 # Install dependencies
 $ npm install
