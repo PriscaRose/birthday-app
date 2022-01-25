@@ -1,9 +1,8 @@
 
 ## Birthday app
 
-## 1- Where you can find my works
+## 1- Where you can see the demo:
 [Demo](https://prisca-birthday-app.netlify.app/)
-[solution](https://github.com/ravinalamada/birthday-app)
 
 ## 2- Screenshot
 ![birthday-app](https://user-images.githubusercontent.com/60210180/144410254-99f4462a-a820-45cc-bcad-05217cb84eff.png)
